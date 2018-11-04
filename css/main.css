@@ -1,0 +1,244 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    background-image: url('../img/bg.jpg');
+    background-size: cover;
+}
+
+.btn {
+    background: #000;
+    color: #fff;
+    font-weight: 100;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 15px 20px;
+    border-radius: 40px;
+}
+
+.btn-container {
+    z-index: 15;
+    position: fixed;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+}
+
+.btn#help {
+    background: rgb(255, 176, 30);
+    border-radius: 100%;    
+    float: left;
+}
+.btn#help:hover {
+    background:  rgb(197, 136, 22);
+}
+.btn.disabled {
+    background: #ddd !important;
+    color: #aaa !important;
+}
+.btn#order {
+    padding: 15px 30px;
+    background: rgb(86, 165, 13);
+    float: right;
+}
+.btn#order:hover {
+    background:  rgb(70, 124, 19)
+}
+
+/* -------------------------------
+
+    Header styles
+
+------------------------------- */
+header .container {
+    position: fixed;
+    top: 15px;
+    left: 0;
+    right: 0;
+    padding-top: 15px;
+}
+
+header h1 {
+    font-size: 36px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+header h2 {
+    font-size: 18px;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+}
+
+/* -------------------------------
+
+    Menu styles
+
+------------------------------- */
+section.menu {
+    position: fixed;
+    top: 150px;
+    bottom: 100px;
+    width: 100%;
+}
+
+section.menu .menu-area {
+    width: 100%;
+    background: #fff;
+    height: 550px;
+    overflow: scroll;
+    position: relative;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+section.menu .menu-area .parent {
+    display: inline-block;
+    padding: 15px;
+}
+
+section.menu .menu-area .item {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    z-index: 1;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+section.menu .menu-area .item:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.10), 0 10px 10px rgba(0,0,0,0.12);
+}
+
+section.menu .menu-area .item .photo {
+    margin: -15px;
+    background-position: 50% 50%;
+    margin-bottom: 15px;
+    height: 120%;
+    background-size: cover;
+
+}
+
+section.menu .menu-area .item .text {
+    z-index: 0;
+    position: absolute;
+    background-image: url("../img/gradient.png");
+    background-repeat: repeat-x;
+    background-size: contain;
+    padding: 15px;
+    bottom: 0px; left: 0px; right: 0px;
+}
+section.menu .menu-area .item .text h1 {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 900;
+    margin-bottom: 0;
+}
+
+section.menu .menu-area .item .text h2 {
+    color: #ddd;
+    font-size: 15px;
+    font-weight: 200;
+    margin-top: 0;
+}
+
+section.menu .menu-area .item:hover {
+    background: #f1f1f1;
+}
+
+/* -------------------------------
+
+    Menu item popup styles
+
+------------------------------- */
+.popup-modal {
+    display: none;
+}
+
+.featherlight {
+    z-index: 10 !important;
+}
+
+.featherlight-close-icon {
+    top: 15px !important;
+    right: 15px !important;
+}
+
+.featherlight-content {
+    width: 70vw;
+    border-radius: 20px;
+    color: #333;
+}
+.featherlight-content #item .text {
+    padding: 15px;
+}
+.featherlight-content #item .text h1 {
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.featherlight-content #item .text h2 {
+    font-weight: 100;
+    font-size: 22px;
+}
+
+.featherlight-content #item .image {
+    margin: -30px;
+    margin-bottom: 30px;
+    height: 250px;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-color: rgb(228, 228, 228);
+}
+
+/* -------------------------------
+
+    Help screen popup
+
+------------------------------- */
+
+#help-screen {
+    z-index: 10;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    padding: 60px;
+    color: #fff;
+    display: none;
+}
+
+#help-screen #content {
+    z-index: 1;
+    position: absolute;
+    bottom: 150px;
+    left: 100px;
+}
+
+#help-screen #content a {
+    color: rgb(199, 199, 199);
+    display: block;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    background: rgba(255,255,255, 0.3);
+    padding: 10px 20px;
+    border-radius: 21px;
+}
+
+#help-screen #content a:hover {
+    background: rgba(255,255,255, 0.4);
+    text-decoration: none;
+}
+
+#help-screen #overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #000;
+    opacity: 0.9;
+    z-index: -1;
+}

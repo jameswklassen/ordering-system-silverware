@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to Papa Roller's</title>
+<meta content="width=device-width,minimum-scale=1,maximum-scale=1" name="viewport"/>
+
+
+<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/featherlight/featherlight.min.css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
+</head>
+
+<body>
+
+	<div class="container btn-container">
+		<div class="btn" id="help">?</div>
+		<div class="btn disabled" id="order">Your order</div>
+	</div>
+	
+<header>
+
+	<div class="container">
+		<h1 class="logo">Papa Roller's</h1>
+		<h2 class="logo">Fine dining</h2>
+	</div>
+
+</header>
+
+<section class="menu">
+	<div class="container">
+		<div class="menu-area">
+			<div id="start">
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer>
+
+</footer>
+
+<!-- modal that will be filled by clicked menu item -->
+<div class="popup-modal">
+	<div id="item">
+		<div class="image">
+		</div>
+		<div class="text">
+			<h1 class="title">Title</h1>
+			<h2 class="cost">$19.99</h1>
+		</div>
+	</div>
+</div>
+
+<!-- Screen the appears when a menu item is clicked -->
+<div id="help-screen">
+	<div id="overlay"></div>
+	<div id="content">
+		<a href="#">I made a mistake with my order</a>
+		<a href="#">I need help with the interface</a>
+		<a href="#">Other</a>
+	</div>
+</div>
+		
+</body>
+
+<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="vendor/featherlight/featherlight.min.js"></script>
+
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/vars.js"></script>
+
+</html>
