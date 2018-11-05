@@ -8,7 +8,7 @@ const menuItems = [
         'description' : 'A nice juicy hamburger....',
         'facts' : {
             'calories' : 450,
-            'Sodium' : 430, // mg 
+            'sodium' : 430, // mg 
             'protein' : 20, // g
         }
     },
@@ -21,7 +21,7 @@ const menuItems = [
         'description' : 'A nice juicy hamburger....',
         'facts' : {
             'calories' : 450,
-            'Sodium' : 430, // mg 
+            'sodium' : 430, // mg 
             'protein' : 20, // g
         }
     },
@@ -34,7 +34,7 @@ const menuItems = [
         'description' : 'A nice juicy hamburger....',
         'facts' : {
             'calories' : 450,
-            'Sodium' : 430, // mg 
+            'sodium' : 430, // mg 
             'protein' : 20, // g
         }
     },
@@ -47,7 +47,7 @@ const menuItems = [
         'description' : 'It is dope',
         'facts' : {
             'calories' : 0,
-            'Sodium' : 0, // mg 
+            'sodium' : 0, // mg 
             'protein' : 0, // g
         }
     }
