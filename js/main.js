@@ -83,11 +83,11 @@ $(document).ready( function() {
         //     return item['category'] == category;
         // });
 
-        $('.menu-area .item').hide();
+        $('.menu-area .item').parent().hide();
 
         $('.menu-area .item').each( function() {
             if( $(this).attr('data-category') == category ) {
-                $(this).show();
+                $(this).parent().show();
             }
         });
     }

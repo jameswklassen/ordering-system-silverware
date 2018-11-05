@@ -147,7 +147,7 @@ const menuItems = [
         'title' : 'Coca-Cola',
         'photoName' : 'coca-cola-coke-cold',
         'price' : 3.99,
-        'category' : 'drinks',
+        'category' : 'drink',
         'description' : 'Coca-Cola, or Coke is a carbonated soft drink manufactured by The Coca-Cola Company. Originally intended as a patent medicine, it was invented in the late 19th century by John Pemberton',
         'facts' : {
             'calories' : 450,
@@ -160,7 +160,7 @@ const menuItems = [
         'title' : 'Cold Beer',
         'photoName' : 'alcohol-beer-beverage',
         'price' : 8.99,
-        'category' : 'drinks',
+        'category' : 'drink',
         'description' : 'Beer is one of the oldest and most widely consumed alcoholic drinks in the world, and the third most popular drink overall after water and tea. Beer is brewed from cereal grains—most commonly from malted barley, though wheat, maize, and rice are also used',
         'facts' : {
             'calories' : 450,
