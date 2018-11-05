@@ -36,6 +36,10 @@ $(document).ready( function() {
         drawMenu($(this).find('a').attr('href').substring(1));
     });
 
+    $('.start-screen').click( function() {
+        $(".start-screen").hide();
+    });
+
     // Order button
     $("#order").click( function() {
         console.log("order");
