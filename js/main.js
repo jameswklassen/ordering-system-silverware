@@ -13,6 +13,8 @@ $(document).ready( function() {
             return obj.id == id;
         });
 
+        console.log(item);
+
         // If the item we clicked on is found in our data, then
         // we can open the modal and populate it with the data 
         // associated with that items id.
@@ -23,6 +25,14 @@ $(document).ready( function() {
             $(modal + ' h2.cost').html(item['price']);
             $(modal + ' .image').css('background-image', 'url("img/' + item['photoName'] + '.jpg")');
         }
+    });
+
+    $('.menu .tabs .item').click( function() {
+        // console.log(  );
+        // $('#start').html('');
+        $('.menu .tabs .item').removeClass('active');
+        $(this).addClass('active');
+        drawMenu($(this).find('a').attr('href').substring(1));
     });
 
     // Order button
@@ -40,9 +50,9 @@ $(document).ready( function() {
         }
     });
 
-    // When the modal is displayed, check if 
-    // we have clicked outside of the modal to 
-    // display the content
+    // When the help screen is displayed, check if 
+    // we have clicked outside of the content to 
+    // hide the help screen
     $("#help-screen #overlay").click( function(){
         $("#help-screen").fadeOut();
     });
@@ -50,33 +60,34 @@ $(document).ready( function() {
     // ---------------------------------
     //      Initialization code
     // ---------------------------------
+
     function init() {
-        let entrees = menuItems.filter(function(item){
-            return item['category'] == 'entree';
-        });
-
-        let desserts = menuItems.filter(function(item){
-            return item['category'] == 'dessert';
-        });
-
-        let appetizers = menuItems.filter(function(item){
-            return item['category'] == 'appetizers';
-        });
-
-        let drinks = menuItems.filter(function(item){
-            return item['category'] == 'drinks';
-        });
-
-        entrees.forEach(function(item) {
+        menuItems.forEach(function(item) {
             let id = item['id'];
             let photoName = item['photoName'];
             let title = item['title'];
             let price = item['price'];
+            let category = item['category'];
 
-            $("#start").append('<div class="col-sm-4 parent"><div class="item" id="' + id + '">' + 
+            $("#start").append('<div class="col-sm-4 parent"><div class="item" id="' + id + '" data-category="' + category + '">' + 
                 '<div class="photo" style="background-image: url(img/'+ photoName + '.jpg)"></div>' + 
                 '<div class="text">' + '<h1>' +  title + '</h1>' + 
                 '<h2>' + price + '</h2>' + "</div></div>");
         });
     }
+
+    function drawMenu(category) {
+        // let items = menuItems.filter(function(item){
+        //     return item['category'] == category;
+        // });
+
+        $('.menu-area .item').hide();
+
+        $('.menu-area .item').each( function() {
+            if( $(this).attr('data-category') == category ) {
+                $(this).show();
+            }
+        });
+    }
+
 });
