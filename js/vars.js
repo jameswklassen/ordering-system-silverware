@@ -6,11 +6,7 @@ const menuItems = [
         'price' : 14.99,
         'category' : 'entree',
         'description' : 'Hamburger is a kind of sandwich consisting of grilled cutlets, served inside that cut round loaf. It is usually supplemented with various seasonings, for example, lettuce, ketchup and mayonnaise, slices of pickled cucumber, tomatoes or zucchini, raw or fried onions.',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 400
     },
     {
         'id' : 1,
@@ -19,11 +15,7 @@ const menuItems = [
         'price' : 9.99,
         'category' : 'entree',
         'description' : 'A BLT is a type of sandwich, named for the initials of its primary ingredients, bacon, lettuce and tomato. It can be made with varying recipes according to personal preference. Simple variants include using different types of lettuce, toasting or not, or adding mayonnaise.',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 300
     },
     {
         'id' : 2,
@@ -32,11 +24,7 @@ const menuItems = [
         'price' : 19.99,
         'category' : 'entree',
         'description' : 'A steak is a meat generally sliced across the muscle fibers, potentially including a bone',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 600
     },
     {
         'id' : 3,
@@ -45,11 +33,7 @@ const menuItems = [
         'price' : 13.95,
         'category' : 'starter',
         'description' : 'Its too good to pass up',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 450
     },
     {
         'id' : 4,
@@ -58,11 +42,7 @@ const menuItems = [
         'price' : 24.99,
         'category' : 'entree',
         'description' : 'Barbecue chicken consists of chicken parts or entire chickens that are barbecued, grilled or smoked. There are many global and regional preparation techniques and cooking styles. Barbecue chicken is often seasoned or coated in a spice rub, barbecue sauce, or both',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 450
     },
     {
         'id' : 5,
@@ -71,11 +51,7 @@ const menuItems = [
         'price' : 10.99,
         'category' : 'dessert',
         'description' : 'Creamy blueberry ice cream is a summer treat that you simply need to taste to believe',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 300
     },
     {
         'id' : 6,
@@ -84,11 +60,7 @@ const menuItems = [
         'price' : 4.99,
         'category' : 'dessert',
         'description' : 'Creamy wipe cream and berries is a summer treat that you simply need to taste to believe',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 800
     },
     {
         'id' : 7,
@@ -97,11 +69,7 @@ const menuItems = [
         'price' : 20.99,
         'category' : 'dessert',
         'description' : 'An ice cream cake is ice cream in the shape of a cake with layers of sponge cake or cookie crumble in between. A popular form is a three-layer cake, with a layer of ice cream between two layers of cake. In a typical assembly, the cake component is baked in the normal way, cut to shape if necessary, and then frozen',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 1000
     },
     {
         'id' : 8,
@@ -110,11 +78,7 @@ const menuItems = [
         'price' : 3.99,
         'category' : 'dessert',
         'description' : 'Have half of a cup of ice cream and really enjoy it rather than eating a tub of sugary frozen yogurt,” Brissette advised. Sorbet and sherbet are better choices stacked next to ice cream and gelato, the experts say. They\'re made with fruit, water and sugar, or low fat milk and generally have less fat than ice cream.',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 240
     },
     {
         'id' : 9,
@@ -123,11 +87,7 @@ const menuItems = [
         'price' : 5.99,
         'category' : 'dessert',
         'description' : 'Chocolate cake or chocolate gâteau is a cake flavored with melted chocolate, cocoa powder, or both',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 400
     },
     {
         'id' : 10,
@@ -136,11 +96,7 @@ const menuItems = [
         'price' : 20.99,
         'category' : 'entree',
         'description' : 'Larger fish, such as tuna, swordfish, salmon, cod and mahi-mahi, are often cut into steaks. Fish steaks can be grilled, pan-fried, broiled or baked. While beef steak takes time to cook and can be tough, fish cooks rapidly, is tender, and tends to fall apart. ... Unlike beef steak, fish steaks are often baked in a sauce.',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 430
     },
     {
         'id' : 11,
@@ -149,11 +105,7 @@ const menuItems = [
         'price' : 3.99,
         'category' : 'drink',
         'description' : 'Coca-Cola, or Coke is a carbonated soft drink manufactured by The Coca-Cola Company. Originally intended as a patent medicine, it was invented in the late 19th century by John Pemberton',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 256
     },
     {
         'id' : 12,
@@ -162,10 +114,6 @@ const menuItems = [
         'price' : 8.99,
         'category' : 'drink',
         'description' : 'Beer is one of the oldest and most widely consumed alcoholic drinks in the world, and the third most popular drink overall after water and tea. Beer is brewed from cereal grains—most commonly from malted barley, though wheat, maize, and rice are also used',
-        'facts' : {
-            'calories' : 450,
-            'sodium' : 430, // mg 
-            'protein' : 20, // g
-        }
+        'calories': 90
     }
 ];
