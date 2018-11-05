@@ -24,6 +24,8 @@ $(document).ready( function() {
             var modal = '.featherlight-content #item';
             $(modal + ' h1').html(item['title']);
             $(modal + ' h2.cost').html(item['price']);
+            $(modal + ' .row .description').html(item['description']);
+            $(modal + ' .row .nutrition').html('Item Calories: ' + item['calories']);
             $(modal + ' .image').css('background-image', 'url("img/' + item['photoName'] + '.jpg")');
         }
     });
