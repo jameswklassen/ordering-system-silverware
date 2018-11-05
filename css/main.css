@@ -153,6 +153,55 @@ section.menu .menu-area .item:hover {
     background: #f1f1f1;
 }
 
+section.menu .tabs .item {
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+    padding: 15px;
+    margin: 0px;
+    position: relative;
+    cursor: pointer;
+    
+}
+
+section.menu .tabs .item.active:after {
+    background: #fff;
+    top: 0;
+}
+
+section.menu .tabs .item.active a {
+    color: #333;
+}
+
+section.menu .tabs .item a {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 100;
+}
+
+section.menu .tabs .item:hover a {
+    color: #333;
+    text-decoration: none;
+}
+section.menu .tabs .item:after {
+    content: "";
+    display: block;
+    background: rgba(214, 214, 214, 0.8);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    height: 400px;
+    width: 100%;
+    z-index: -1;
+    border-radius: 20px;
+    transition: top .2s;
+}
+
+section.menu .tabs .item:hover::after {
+    top: 0;
+}
+
 /* -------------------------------
 
     Menu item popup styles
@@ -205,7 +254,7 @@ section.menu .menu-area .item:hover {
 ------------------------------- */
 
 #help-screen {
-    z-index: 10;
+    z-index: 11;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     padding: 60px;
