@@ -20,7 +20,7 @@ body {
 .btn-container {
     z-index: 15;
     position: fixed;
-    bottom: 15px;
+    bottom: 30px;
     left: 0;
     right: 0;
 }
