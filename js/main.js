@@ -1,5 +1,6 @@
 $(document).ready( function() {
     init();
+    drawMenu('starter');
 
     // ---------------------------------
     //      button pressing code
@@ -62,6 +63,7 @@ $(document).ready( function() {
     // ---------------------------------
 
     function init() {
+
         menuItems.forEach(function(item) {
             let id = item['id'];
             let photoName = item['photoName'];
