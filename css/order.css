@@ -1,0 +1,98 @@
+.order-overview {
+    display: none;
+    padding-top: 60px;
+    padding-bottom: 120px;    
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #fff;
+    z-index: 12;
+    color: #333;
+}
+.order-overview .header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 60px;
+    margin-bottom: 60px;
+}
+.order-overview h1 {
+    font-size: 47px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.order-overview .btn {
+    width: 100%;
+}
+
+.order-overview #edit-order {
+    background-color: #efefef;
+    color: #888;
+}
+.order-overview #edit-order:hover {
+    background-color: #d8d8d8;
+}
+
+.order-overview #add-to-order {
+    background-color: #007bff;
+    color: #fff;
+}
+.order-overview #add-to-order:hover {
+    background-color: #0068d6;
+}
+
+.order-overview .overview {
+    /* background: #efefef; */
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    height: 400px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.order-overview .overview .item {
+    /* background: #aaa;     */
+    padding: 15px;
+    height: 100px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+}
+
+.order-overview .overview .item .image {
+    background: #222;
+    background-size: cover;
+    background-position: 50% 50%;
+    height: 60px;
+    border-radius: 10px;
+}
+
+
+.order-overview .overview .item .details {
+    padding-left: 30px;
+}
+
+.order-overview .overview .item .details h2 {
+    /* text-transform: uppercase; */
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.order-overview .overview .item .cost {
+    text-align: right;
+}
+
+.order-overview .overview .item .cost h3 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.order-overview .total {
+    text-align: right;
+    padding-right: 30px;
+}
+
+
+@media only screen and (max-width: 768px){
+    .btn {
+        margin-bottom: 15px;
+    }
+}

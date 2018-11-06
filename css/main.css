@@ -23,6 +23,7 @@ body {
     bottom: 30px;
     left: 0;
     right: 0;
+    padding: 0 30px;
 }
 
 .btn#help {

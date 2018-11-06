@@ -1,6 +1,16 @@
+var currOrder = new Array();            // holds the current order
+var orderTotal = 0.0;                   // the total cost of the order
+
 $(document).ready( function() {
-    init();
-    drawMenu('starter');
+    init();                     // initialize 
+    drawMenu('starter');        // set the initial category to "starters"
+
+
+    // For debugging! Generates a fake order
+    for(var i = 0; i < 9; i++){
+        addToOrder(i);
+    }
+
 
     // ---------------------------------
     //      button pressing code
@@ -37,15 +47,20 @@ $(document).ready( function() {
     });
 
     // Order button
-    $("#order").click( function() {
+    $("#order, #add-to-order").click( function() {
         console.log("order");
+        if($(".order-overview").is(":visible")){
+            $(".order-overview").fadeOut();
+        } else {
+            $(".order-overview").fadeIn();
+        }
     });
 
     // Help Button
     $("#help").click( function() {
         console.log("help!");
         if($("#help-screen").is(":visible")){
-            $("help-screen").fadeOut();
+            $("#help-screen").fadeOut();
         } else {
             $("#help-screen").fadeIn();
         }
@@ -72,24 +87,59 @@ $(document).ready( function() {
             let category = item['category'];
 
             $("#start").append('<div class="col-sm-4 parent"><div class="item" id="' + id + '" data-category="' + category + '">' + 
-                '<div class="photo" style="background-image: url(img/'+ photoName + '.jpg)"></div>' + 
+                '<div class="photo" style="background-image: url(img/thumbs/'+ photoName + '.jpg)"></div>' + 
                 '<div class="text">' + '<h1>' +  title + '</h1>' + 
                 '<h2>' + price + '</h2>' + "</div></div>");
         });
     }
 
     function drawMenu(category) {
-        // let items = menuItems.filter(function(item){
-        //     return item['category'] == category;
-        // });
 
-        $('.menu-area .item').parent().hide();
-
+        // Iterate through each menu item in the menu
+        // If it is the filtered category, show it
+        // else hide it
         $('.menu-area .item').each( function() {
             if( $(this).attr('data-category') == category ) {
                 $(this).parent().show();
+            } else {
+                $(this).parent().hide();
             }
         });
     }
+
+    
+    // Given an ID, adds specific menu item to the customer's order
+    function addToOrder(id) {
+
+        // First get the menu item object from the list
+        var itemToAdd;
+        menuItems.forEach(function(item) {
+            if(item['id'] === id) {
+                itemToAdd = item;
+            }
+        });
+
+        // A big mess of code......
+        // This adds the formatted item 
+        // to the "your order" screen
+        $('.order-overview .overview').append(
+            '<div class="item"><div class="row"><div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + 
+            '.jpg);"></div><div class="col-sm-6 details"><h2>' + itemToAdd['title'] + '</h2></div><div class="col-sm-3 cost"><h3>$' + itemToAdd['price'] + '</h3>' + 
+            '</div></div></div>'
+            
+        );
+
+        currOrder.push(itemToAdd);                                  // add the item to the customers order
+        orderTotal += itemToAdd['price'];                           // add the cost of the item to the total cost
+        orderTotal = Math.floor(orderTotal * 100) / 100;   // truncate total to 2 decimals)
+        $('.order-overview .total h2').html('$' + orderTotal);      // output the new total at the bottom of the order page
+
+        if(currOrder.length > 0){
+            $('#order').removeClass('disabled');                    // make the order button green when an order has items in it
+        }
+
+    }
+
+
 
 });
