@@ -18,7 +18,7 @@
 
 <div class="container btn-container">
 	<div class="btn" id="help">?</div>
-	<div class="btn disabled" id="order">Your order</div>
+	<div class="btn disabled" id="order">Your order <span class="qty"></span></div>
 </div>
 
 
@@ -80,15 +80,20 @@
 	<div id="item">
 		<div class="image">
 		</div>
-		<div class="text">
-			<h1 class="title">Title</h1>
-			<h2 class="cost">$19.99</h1>
+		<div class="content">
+			<div class="info">
+				<h1 class="title">Title</h1>
+				<h2 class="cost">$19.99</h2>
+				<div class="btn" id="add-item-to-order" data-id="">Add to order</div>
+			</div>
+			<div class="text">
 				<div class="row">
-					<div class="col-md-8 description">
-					  Item description
-					</div>
-					<div class="col-md-3 nutrition">
-					  Nutrition facts
+						<div class="col-md-8 description">
+							Item description
+						</div>
+						<div class="col-md-3 nutrition">
+							Nutrition facts
+						</div>
 					</div>
 				</div>
 		</div>

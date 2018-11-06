@@ -7,9 +7,9 @@ $(document).ready( function() {
 
 
     // For debugging! Generates a fake order
-    for(var i = 0; i < 9; i++){
-        addToOrder(i);
-    }
+    // for(var i = 0; i < 9; i++){
+    //     addToOrder(i);
+    // }
 
 
     // ---------------------------------
@@ -37,6 +37,7 @@ $(document).ready( function() {
             $(modal + ' .row .description').html(item['description']);
             $(modal + ' .row .nutrition').html('Item Calories: ' + item['calories']);
             $(modal + ' .image').css('background-image', 'url("img/' + item['photoName'] + '.jpg")');
+            $(modal + ' #add-item-to-order').attr('data-id', item['id']);
         }
     });
 
@@ -75,6 +76,11 @@ $(document).ready( function() {
         $("#help-screen").fadeOut();
     });
 
+    $('#add-item-to-order').click( function() {
+        addToOrder($(this).attr('data-id'));
+        // console.log($(this).attr('data-id'));
+    });
+
     // ---------------------------------
     //      Initialization code
     // ---------------------------------
@@ -88,7 +94,7 @@ $(document).ready( function() {
             let price = item['price'];
             let category = item['category'];
 
-            $("#start").append('<div class="col-sm-4 parent"><div class="item" id="' + id + '" data-category="' + category + '">' + 
+            $("#start").append('<div class="col-sm-6 col-md-4 parent"><div class="item" id="' + id + '" data-category="' + category + '">' + 
                 '<div class="photo" style="background-image: url(img/thumbs/'+ photoName + '.jpg)"></div>' + 
                 '<div class="text">' + '<h1>' +  title + '</h1>' + 
                 '<h2>' + price + '</h2>' + "</div></div>");
@@ -116,7 +122,7 @@ $(document).ready( function() {
         // First get the menu item object from the list
         var itemToAdd;
         menuItems.forEach(function(item) {
-            if(item['id'] === id) {
+            if(item['id'] == id) {
                 itemToAdd = item;
             }
         });
@@ -138,7 +144,13 @@ $(document).ready( function() {
 
         if(currOrder.length > 0){
             $('#order').removeClass('disabled');                    // make the order button green when an order has items in it
+            $('.btn#order .qty').html(' (' + currOrder.length + ')');
+        } else {
+            $('#order').addClass('disabled');                
+            $('.btn#order .qty').html('');
         }
+
+
 
     }
 
