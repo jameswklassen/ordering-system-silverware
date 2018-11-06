@@ -145,6 +145,10 @@ $(document).ready( function() {
         if(currOrder.length > 0){
             $('#order').removeClass('disabled');                    // make the order button green when an order has items in it
             $('.btn#order .qty').html(' (' + currOrder.length + ')');
+            $('.btn#order').css('transform', 'scale(1.3)')
+            setTimeout(function() {
+                $('.btn#order').css('transform', 'scale(1.0)');
+            }, 150);
         } else {
             $('#order').addClass('disabled');                
             $('.btn#order .qty').html('');
