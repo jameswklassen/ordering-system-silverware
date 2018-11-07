@@ -3,7 +3,7 @@ body {
     color: #fff;
     font-family: 'Open Sans', sans-serif;
     background-image: url('../img/bg.jpg');
-    background-size: cover;
+    background-size: 100%;
 }
 
 .btn {
@@ -77,6 +77,47 @@ header h2 {
     text-transform: uppercase;
     letter-spacing: 7px;
 }
+
+/* -------------------------------
+
+    Start Screen styles
+
+------------------------------- */
+.start-screen{
+    z-index: 16;
+    position: fixed;
+    background-image: url('../img/bg.jpg');
+    background-size: cover;
+    bottom: 0px; left: 0px; right: 0px; top:0px;
+    padding: 15px;
+}
+
+.start-logo{
+    text-align: center;
+    padding:10%;
+}
+
+.start-name {
+    font-size: 45px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+.start-title{
+    font-size: 30px;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+}
+
+.start-message{
+    font-size: 15px;
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-align: center;
+}
+
 
 /* -------------------------------
 
