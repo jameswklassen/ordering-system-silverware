@@ -5,10 +5,12 @@ var popThreshold = 8;           // Minimum popularity rating for items to be in 
 $(document).ready( function() {
 
     $('.menu-area').height($(window).height() - 400);               // resizes the menu area based on window height
+    $('.overview').height($(window).height() - 475);
 
     // Whenever the window is resized, resize the menu area
     $(window).resize(function () {
         $('.menu-area').height($(window).height() - 400);
+        $('.overview').height($(window).height() - 475);
     });
 
     init();                     // initialize 
