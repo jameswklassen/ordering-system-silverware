@@ -3,6 +3,14 @@ var orderTotal = 0.0;           // the total cost of the order
 var popThreshold = 8;           // Minimum popularity rating for items to be in popular tab
 
 $(document).ready( function() {
+
+    $('.menu-area').height($(window).height() - 400);               // resizes the menu area based on window height
+
+    // Whenever the window is resized, resize the menu area
+    $(window).resize(function () {
+        $('.menu-area').height($(window).height() - 400);
+    });
+
     init();                     // initialize 
     drawMenu('starter');        // set the initial category to "starters"
 
