@@ -272,6 +272,7 @@ section.menu .tabs .item:hover::after {
     max-width: 700px;
     border-radius: 20px;
     color: #333;
+    overflow-x: hidden !important;
 }
 .featherlight-content #item .content {
     padding: 15px;
