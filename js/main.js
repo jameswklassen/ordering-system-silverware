@@ -1,9 +1,11 @@
 var currOrder = new Array();            // holds the current order
+var otherOrder = new Array();            // holds a copy of the current order
 var orderTotal = 0.0;                   // the total cost of the order
+var editMode = false;
 
 $(document).ready( function() {
     init();                     // initialize 
-    drawMenu('starter');        // set the initial category to "starters"
+    drawMenu('drink');        // set the initial category to "starters"
 
 
     // For debugging! Generates a fake order
@@ -85,6 +87,16 @@ $(document).ready( function() {
         // console.log($(this).attr('data-id'));
     });
 
+    $('#edit-order').click( function() {
+        toggleEditMode();
+        // console.log($(this).attr('data-id'));
+    });
+
+    $('.order-overview .overview .remove-item-from-order').click( function() {
+        console.log("hi bitch");
+        removeFromOrder($(this).attr('data-id'));
+    });
+
     // ---------------------------------
     //      Initialization code
     // ---------------------------------
@@ -136,10 +148,12 @@ $(document).ready( function() {
         // to the "your order" screen
         $('.order-overview .overview').append(
             '<div class="item"><div class="row"><div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + 
-            '.jpg);"></div><div class="col-sm-6 details"><h2>' + itemToAdd['title'] + '</h2></div><div class="col-sm-3 cost"><h3>$' + itemToAdd['price'] + '</h3>' + 
+            '.jpg);"></div><div class="col-sm-6 details"><h2>' + itemToAdd['title'] + '<div class="btn remove-item-from-order" data-id="' + itemToAdd['id'] + '">Remove Item</div>'
+             +'</h2></div><div class="col-sm-3 cost"><h3>$' + itemToAdd['price'] + '</h3>' + 
             '</div></div></div>'
-            
         );
+        
+        $('.order-overview .overview .remove-item-from-order').hide();
 
         currOrder.push(itemToAdd);                                  // add the item to the customers order
         orderTotal += itemToAdd['price'];                           // add the cost of the item to the total cost
@@ -157,11 +171,25 @@ $(document).ready( function() {
             $('#order').addClass('disabled');                
             $('.btn#order .qty').html('');
         }
+    }
 
-
+    function removeFromOrder(id) {
+        $(".order-overview .overview").empty();
 
     }
 
-
+    function toggleEditMode() {
+        if(!editMode)
+        {
+            $('#edit-order').html("cancel editing")
+            $('.order-overview .overview .remove-item-from-order').fadeIn();
+            editMode = true;
+        } else
+        {
+            $('#edit-order').html("edit <i class=\"fas fa-edit\"></i>")
+            $('.order-overview .overview .remove-item-from-order').fadeOut();
+            editMode = false;
+        }
+    }
 
 });
