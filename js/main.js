@@ -5,21 +5,15 @@ $(document).ready( function() {
 
     console.log();
 
-    $('.menu-area').height($(window).height() - 400);
+    $('.menu-area').height($(window).height() - 400);               // resizes the menu area based on window height
 
+    // Whenever the window is resized, resize the menu area
     $(window).resize(function () {
         $('.menu-area').height($(window).height() - 400);
     });
 
     init();                     // initialize 
     drawMenu('starter');        // set the initial category to "starters"
-
-
-    // For debugging! Generates a fake order
-    // for(var i = 0; i < 9; i++){
-    //     addToOrder(i);
-    // }
-
 
     // ---------------------------------
     //      button pressing code
