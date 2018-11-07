@@ -203,13 +203,12 @@ section.menu .menu-area .item:hover {
 
 section.menu .tabs .item {
     display: inline-block;
-    width: 20%;
+    width: 19%; /*Had to change this from 20% to 19% to fit all tabs*/
     text-align: center;
     padding: 15px;
     margin: 0px;
     position: relative;
     cursor: pointer;
-    
 }
 
 section.menu .tabs .item.active:after {
