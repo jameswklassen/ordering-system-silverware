@@ -239,7 +239,7 @@ section.menu .tabs .item:after {
     position: absolute;
     top: 60px;
     left: 0;
-    height: 400px;
+    height: 100px;
     width: 100%;
     z-index: -1;
     border-radius: 20px;

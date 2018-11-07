@@ -2,6 +2,15 @@ var currOrder = new Array();            // holds the current order
 var orderTotal = 0.0;                   // the total cost of the order
 
 $(document).ready( function() {
+
+    console.log();
+
+    $('.menu-area').height($(window).height() - 400);
+
+    $(window).resize(function () {
+        $('.menu-area').height($(window).height() - 400);
+    });
+
     init();                     // initialize 
     drawMenu('starter');        // set the initial category to "starters"
 
