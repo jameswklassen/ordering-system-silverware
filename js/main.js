@@ -50,7 +50,7 @@ $(document).ready( function() {
     });
 
     $('.start-screen').click( function() {
-        $(".start-screen").hide();
+        $(".start-screen").fadeOut(700);
     });
 
     // Order button
