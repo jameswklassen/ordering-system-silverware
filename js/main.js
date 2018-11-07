@@ -1,16 +1,10 @@
-var currOrder = new Array();            // holds the current order
-var orderTotal = 0.0;                   // the total cost of the order
+var currOrder = new Array();    // holds the current order
+var orderTotal = 0.0;           // the total cost of the order
+var popThreshold = 8;           // Minimum popularity rating for items to be in popular tab
 
 $(document).ready( function() {
     init();                     // initialize 
     drawMenu('starter');        // set the initial category to "starters"
-
-
-    // For debugging! Generates a fake order
-    // for(var i = 0; i < 9; i++){
-    //     addToOrder(i);
-    // }
-
 
     // ---------------------------------
     //      button pressing code
@@ -18,13 +12,10 @@ $(document).ready( function() {
 
     // When a menu item in the menu is clicked
     $('.menu-area .item').on("click", function() {
-
         var id = $(this).attr('id');                
         let item = menuItems.find(function(obj){
             return obj.id == id;
         });
-
-        console.log(item);
 
         // If the item we clicked on is found in our data, then
         // we can open the modal and populate it with the data 
@@ -90,7 +81,6 @@ $(document).ready( function() {
     // ---------------------------------
 
     function init() {
-
         menuItems.forEach(function(item) {
             let id = item['id'];
             let photoName = item['photoName'];
@@ -106,29 +96,44 @@ $(document).ready( function() {
     }
 
     function drawMenu(category) {
+        if (category == 'popular') {
+            $('.menu-area .item').each(function() {
+                var id = $(this).attr('id');
+                
+                // Find the item with this matching id
+                var item = menuItems.find(function(element){
+                    return element['id'] == id;
+                }); 
 
-        // Iterate through each menu item in the menu
-        // If it is the filtered category, show it
-        // else hide it
-        $('.menu-area .item').each( function() {
-            if( $(this).attr('data-category') == category ) {
-                $(this).parent().show();
-            } else {
-                $(this).parent().hide();
-            }
-        });
+                // If the popularity of the given item meets
+                // or is greater than the specified popularity
+                // threshold, then display the item.
+                if (item['popularity'] >= popThreshold) {
+                    $(this).parent().show();
+                } else {
+                    $(this).parent().hide();
+                }
+            });
+        } else {
+            // Iterate through each menu item in the menu
+            // If it is the filtered category, show it
+            // else hide it
+            $('.menu-area .item').each( function() {
+                if( $(this).attr('data-category') == category ) {
+                    $(this).parent().show();
+                } else {
+                    $(this).parent().hide();
+                }
+            });
+        }
     }
-
     
     // Given an ID, adds specific menu item to the customer's order
     function addToOrder(id) {
 
         // First get the menu item object from the list
-        var itemToAdd;
-        menuItems.forEach(function(item) {
-            if(item['id'] == id) {
-                itemToAdd = item;
-            }
+        var itemToAdd = menuItems.find(function(element){
+            return element['id'] == id;
         });
 
         // A big mess of code......
@@ -138,12 +143,11 @@ $(document).ready( function() {
             '<div class="item"><div class="row"><div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + 
             '.jpg);"></div><div class="col-sm-6 details"><h2>' + itemToAdd['title'] + '</h2></div><div class="col-sm-3 cost"><h3>$' + itemToAdd['price'] + '</h3>' + 
             '</div></div></div>'
-            
         );
 
         currOrder.push(itemToAdd);                                  // add the item to the customers order
         orderTotal += itemToAdd['price'];                           // add the cost of the item to the total cost
-        orderTotal = Math.floor(orderTotal * 100) / 100;   // truncate total to 2 decimals)
+        orderTotal = Math.floor(orderTotal * 100) / 100;            // truncate total to 2 decimals
         $('.order-overview .total h2').html('$' + orderTotal);      // output the new total at the bottom of the order page
 
         if(currOrder.length > 0){
@@ -157,11 +161,5 @@ $(document).ready( function() {
             $('#order').addClass('disabled');                
             $('.btn#order .qty').html('');
         }
-
-
-
     }
-
-
-
 });
