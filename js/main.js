@@ -1,6 +1,10 @@
-var currOrder = new Array();    // holds the current order
-var orderTotal = 0.0;           // the total cost of the order
+
+var currOrder = new Array();            // holds the current order
+var otherOrder = new Array();            // holds a copy of the current order
+var orderTotal = 0.0;                   // the total cost of the order
 var popThreshold = 8;           // Minimum popularity rating for items to be in popular tab
+var editMode = false;
+
 
 $(document).ready( function() {
 
@@ -43,8 +47,6 @@ $(document).ready( function() {
     });
 
     $('.menu .tabs .item').click( function() {
-        // console.log(  );
-        // $('#start').html('');
         $('.menu .tabs .item').removeClass('active');
         $(this).addClass('active');
         drawMenu($(this).find('a').attr('href').substring(1));
@@ -56,7 +58,7 @@ $(document).ready( function() {
 
     // Order button
     $("#order, #add-to-order").click( function() {
-        console.log("order");
+        // console.log("order");
         if($(".order-overview").is(":visible")){
             $(".order-overview").fadeOut();
         } else {
@@ -84,6 +86,16 @@ $(document).ready( function() {
     $('#add-item-to-order').click( function() {
         addToOrder($(this).attr('data-id'));
         // console.log($(this).attr('data-id'));
+    });
+
+    $('#edit-order').click( function() {
+        toggleEditMode();
+        // console.log($(this).attr('data-id'));
+    });
+
+    // Removes an item from an order when the "remove item" button is clicked
+    $('.order-overview').on("click", ".remove-item-from-order", function() {
+        removeFromOrder($(this).attr('data-id'));
     });
 
     // ---------------------------------
@@ -146,19 +158,30 @@ $(document).ready( function() {
             return element['id'] == id;
         });
 
-        // A big mess of code......
-        // This adds the formatted item 
-        // to the "your order" screen
+        // adds the formatted item to the "your order" screen
         $('.order-overview .overview').append(
-            '<div class="item"><div class="row"><div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + 
-            '.jpg);"></div><div class="col-sm-6 details"><h2>' + itemToAdd['title'] + '</h2></div><div class="col-sm-3 cost"><h3>$' + itemToAdd['price'] + '</h3>' + 
-            '</div></div></div>'
+
+            '<div class="item">' + 
+                '<div class="row">' + 
+                    '<div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + '.jpg);"></div>' + 
+                    '<div class="col-sm-6 details">' + 
+                        '<h2>' + itemToAdd['title'] + '</h2>' + 
+                        '<div class="btn remove-item-from-order" data-id="' + itemToAdd['id'] + '">Remove Item</div>' + 
+                    '</div>' + 
+                    '<div class="col-sm-3 cost">' + 
+                        '<h3>$' + itemToAdd['price'] + '</h3>' + 
+                    '</div>' + 
+                '</div>' + 
+            '</div>'
         );
+        
+        $('.remove-item-from-order').hide();
 
         currOrder.push(itemToAdd);                                  // add the item to the customers order
         orderTotal += itemToAdd['price'];                           // add the cost of the item to the total cost
-        orderTotal = Math.floor(orderTotal * 100) / 100;            // truncate total to 2 decimals
-        $('.order-overview .total h2').html('$' + orderTotal);      // output the new total at the bottom of the order page
+
+        $('.order-overview .total h2').html('$' +  Math.floor(orderTotal * 100) / 100);      // output the new total at the bottom of the order page (truncated to 2 decimals)
+
 
         if(currOrder.length > 0){
             $('#order').removeClass('disabled');                    // make the order button green when an order has items in it
@@ -172,4 +195,23 @@ $(document).ready( function() {
             $('.btn#order .qty').html('');
         }
     }
+
+    function removeFromOrder(id) {
+        $(".order-overview .overview").empty();
+    }
+
+    function toggleEditMode() {
+        if(!editMode)
+        {
+            $('#edit-order').html("cancel editing")
+            $('.order-overview .overview .remove-item-from-order').fadeIn();
+            editMode = true;
+        } else
+        {
+            $('#edit-order').html("edit <i class=\"fas fa-edit\"></i>")
+            $('.order-overview .overview .remove-item-from-order').fadeOut();
+            editMode = false;
+        }
+    }
+
 });
