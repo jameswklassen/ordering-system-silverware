@@ -1,9 +1,9 @@
 
 var currOrder = new Array();            // holds the current order
+var pOrderList = new Array();            // holds the current order (unique attributes)
 var orderTotal = 0.0;                   // the total cost of the order
 var popThreshold = 8;           // Minimum popularity rating for items to be in popular tab
 var editMode = false;
-
 
 $(document).ready( function() {
 
@@ -166,10 +166,13 @@ $(document).ready( function() {
             return element['id'] == id;
         });
 
+        currOrder.push(itemToAdd);                                  // add the item to the customers order
+        var uniqueID = getID();
+        pOrderList.push(uniqueID);
+
         // adds the formatted item to the "your order" screen
         $('.order-overview .overview').append(
-
-            '<div class="item" data-id="' + itemToAdd['id'] + '">' + 
+            '<div class="item" data-id="' + uniqueID + '">' + 
                 '<div class="row">' + 
                     '<div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + '.jpg);"></div>' + 
                     '<div class="col-sm-6 details">' + 
@@ -185,11 +188,9 @@ $(document).ready( function() {
         
         $('.remove-item-from-order').hide();
 
-        currOrder.push(itemToAdd);                                  // add the item to the customers order
         orderTotal += itemToAdd['price'];                           // add the cost of the item to the total cost
 
         $('.order-overview .total h2').html('$' +  Math.floor(orderTotal * 100) / 100);      // output the new total at the bottom of the order page (truncated to 2 decimals)
-
 
         if(currOrder.length > 0){
             $('#order').removeClass('disabled');                    // make the order button green when an order has items in it
@@ -206,31 +207,42 @@ $(document).ready( function() {
 
     function removeFromOrder(id) {
         // First get the menu item object from the list
-        var itemToRemove = menuItems.find(function(element){
+        console.log(id);
+        var itemToRemove = currOrder.find(function(element){
+            console.log(element);
             return element['id'] == id;
         });
         
         //Remove from the array
-        currOrder.splice(currOrder.indexOf(itemToRemove), 1);
+        var itemIndex = currOrder.indexOf(itemToRemove);
+        var uniqueID = pOrderList[itemIndex];
+        currOrder.splice(itemIndex, 1);
+        pOrderList.splice(itemIndex, 1);
 
         //Find the new order total
         orderTotal -= itemToRemove['price'];
 
+        //Fix negative numbers
         if(orderTotal < 0) {
             orderTotal = 0;
         }
         
+        if(currOrder.length == 0) {
+            toggleEditMode();
+            $('.order-overview .overview').empty();
+        }
+
         //Remove the item from the overview screen
-        $('.order-overview .overview .item[data-id="' + id + '"]').remove();
+        $('.order-overview .overview .item[data-id="' + uniqueID + '"]').remove();
 
         //Update the totals and other information
         $('.order-overview .total h2').html('$' +  Math.floor(orderTotal * 100) / 100);      // output the new total at the bottom of the order page (truncated to 2 decimals)
         $('#order').removeClass('disabled');                    // make the order button green when an order has items in it
-            $('.btn#order .qty').html(' (' + currOrder.length + ')');
-            $('.btn#order').css('transform', 'scale(1.3)')
-            setTimeout(function() {
-                $('.btn#order').css('transform', 'scale(1.0)');
-            }, 150);
+        $('.btn#order .qty').html(' (' + currOrder.length + ')');
+        $('.btn#order').css('transform', 'scale(1.3)')
+        setTimeout(function() {
+            $('.btn#order').css('transform', 'scale(1.0)');
+        }, 150);
 
         $('.order-overview .overview .remove-item-from-order').show();
     }
@@ -247,6 +259,15 @@ $(document).ready( function() {
             $('.order-overview .overview .remove-item-from-order').fadeOut();
             editMode = false;
         }
+    }
+
+    function getID() {
+        var text = "";
+        var values = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+        for (var i = 0; i < 10; i++) {
+          text += values.charAt(Math.floor(Math.random() * values.length));
+        }
+        return text;
     }
 
 });
