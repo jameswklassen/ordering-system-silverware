@@ -7,13 +7,6 @@ $(document).ready( function() {
     init();                     // initialize 
     drawMenu('drink');        // set the initial category to "starters"
 
-
-    // For debugging! Generates a fake order
-    // for(var i = 0; i < 9; i++){
-    //     addToOrder(i);
-    // }
-
-
     // ---------------------------------
     //      button pressing code
     // ---------------------------------
@@ -44,8 +37,6 @@ $(document).ready( function() {
     });
 
     $('.menu .tabs .item').click( function() {
-        // console.log(  );
-        // $('#start').html('');
         $('.menu .tabs .item').removeClass('active');
         $(this).addClass('active');
         drawMenu($(this).find('a').attr('href').substring(1));
@@ -57,7 +48,7 @@ $(document).ready( function() {
 
     // Order button
     $("#order, #add-to-order").click( function() {
-        console.log("order");
+        // console.log("order");
         if($(".order-overview").is(":visible")){
             $(".order-overview").fadeOut();
         } else {
@@ -92,8 +83,8 @@ $(document).ready( function() {
         // console.log($(this).attr('data-id'));
     });
 
-    $('.order-overview .overview .remove-item-from-order').click( function() {
-        console.log("hi bitch");
+    // Removes an item from an order when the "remove item" button is clicked
+    $('.order-overview').on("click", ".remove-item-from-order", function() {
         removeFromOrder($(this).attr('data-id'));
     });
 
@@ -143,22 +134,27 @@ $(document).ready( function() {
             }
         });
 
-        // A big mess of code......
-        // This adds the formatted item 
-        // to the "your order" screen
+        // adds the formatted item to the "your order" screen
         $('.order-overview .overview').append(
-            '<div class="item"><div class="row"><div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + 
-            '.jpg);"></div><div class="col-sm-6 details"><h2>' + itemToAdd['title'] + '<div class="btn remove-item-from-order" data-id="' + itemToAdd['id'] + '">Remove Item</div>'
-             +'</h2></div><div class="col-sm-3 cost"><h3>$' + itemToAdd['price'] + '</h3>' + 
-            '</div></div></div>'
+            '<div class="item">' + 
+                '<div class="row">' + 
+                    '<div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + '.jpg);"></div>' + 
+                    '<div class="col-sm-6 details">' + 
+                        '<h2>' + itemToAdd['title'] + '</h2>' + 
+                        '<div class="btn remove-item-from-order" data-id="' + itemToAdd['id'] + '">Remove Item</div>' + 
+                    '</div>' + 
+                    '<div class="col-sm-3 cost">' + 
+                        '<h3>$' + itemToAdd['price'] + '</h3>' + 
+                    '</div>' + 
+                '</div>' + 
+            '</div>'
         );
         
-        $('.order-overview .overview .remove-item-from-order').hide();
+        $('.remove-item-from-order').hide();
 
         currOrder.push(itemToAdd);                                  // add the item to the customers order
         orderTotal += itemToAdd['price'];                           // add the cost of the item to the total cost
-        orderTotal = Math.floor(orderTotal * 100) / 100;   // truncate total to 2 decimals)
-        $('.order-overview .total h2').html('$' + orderTotal);      // output the new total at the bottom of the order page
+        $('.order-overview .total h2').html('$' +  Math.floor(orderTotal * 100) / 100);      // output the new total at the bottom of the order page (truncated to 2 decimals)
 
         if(currOrder.length > 0){
             $('#order').removeClass('disabled');                    // make the order button green when an order has items in it
@@ -175,7 +171,6 @@ $(document).ready( function() {
 
     function removeFromOrder(id) {
         $(".order-overview .overview").empty();
-
     }
 
     function toggleEditMode() {
