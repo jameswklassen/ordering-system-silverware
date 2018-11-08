@@ -1,6 +1,5 @@
 
 var currOrder = new Array();            // holds the current order
-var otherOrder = new Array();            // holds a copy of the current order
 var orderTotal = 0.0;                   // the total cost of the order
 var popThreshold = 8;           // Minimum popularity rating for items to be in popular tab
 var editMode = false;
@@ -91,7 +90,9 @@ $(document).ready( function() {
     });
 
     $('#edit-order').click( function() {
-        toggleEditMode();
+        if(currOrder.length > 0) {
+            toggleEditMode();
+        }
         // console.log($(this).attr('data-id'));
     });
 
@@ -168,7 +169,7 @@ $(document).ready( function() {
         // adds the formatted item to the "your order" screen
         $('.order-overview .overview').append(
 
-            '<div class="item">' + 
+            '<div class="item" data-id="' + itemToAdd['id'] + '">' + 
                 '<div class="row">' + 
                     '<div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + '.jpg);"></div>' + 
                     '<div class="col-sm-6 details">' + 
@@ -204,22 +205,34 @@ $(document).ready( function() {
     }
 
     function removeFromOrder(id) {
-        orderTotal = 0;
-        $(".order-overview .overview").empty();
-        $('.order-overview .total h2').html('$' +  Math.floor(orderTotal * 100) / 100);      // output the new total at the bottom of the order page (truncated to 2 decimals)
-        $('#order').addClass('disabled');                
-        $('.btn#order .qty').html('');
-
         // First get the menu item object from the list
         var itemToRemove = menuItems.find(function(element){
             return element['id'] == id;
         });
-
-        currOrder.splice(currOrder.indexOf(itemToRemove), 1);
         
-        currOrder.forEach(function(item){
-            addToOrder(item['id']);
-        });
+        //Remove from the array
+        currOrder.splice(currOrder.indexOf(itemToRemove), 1);
+
+        //Find the new order total
+        orderTotal -= itemToRemove['price'];
+
+        if(orderTotal < 0) {
+            orderTotal = 0;
+        }
+        
+        //Remove the item from the overview screen
+        $('.order-overview .overview .item[data-id="' + id + '"]').remove();
+
+        //Update the totals and other information
+        $('.order-overview .total h2').html('$' +  Math.floor(orderTotal * 100) / 100);      // output the new total at the bottom of the order page (truncated to 2 decimals)
+        $('#order').removeClass('disabled');                    // make the order button green when an order has items in it
+            $('.btn#order .qty').html(' (' + currOrder.length + ')');
+            $('.btn#order').css('transform', 'scale(1.3)')
+            setTimeout(function() {
+                $('.btn#order').css('transform', 'scale(1.0)');
+            }, 150);
+
+        $('.order-overview .overview .remove-item-from-order').show();
     }
 
     function toggleEditMode() {
