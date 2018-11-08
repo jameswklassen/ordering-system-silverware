@@ -120,6 +120,7 @@ $(document).ready( function() {
 
     // Removes an item from an order when the "remove item" button is clicked
     $('.order-overview').on("click", ".remove-item-from-order", function() {
+        // NO ONE TOUCH THIS
         removeFromOrder($(this).attr('data-id'), $(this).parent().parent().parent().attr('data-id'));
     });
 
