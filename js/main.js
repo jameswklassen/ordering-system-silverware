@@ -120,7 +120,7 @@ $(document).ready( function() {
 
     // Removes an item from an order when the "remove item" button is clicked
     $('.order-overview').on("click", ".remove-item-from-order", function() {
-        removeFromOrder($(this).attr('data-id'));
+        removeFromOrder($(this).attr('data-id'), $(this).parent().parent().parent().attr('data-id'));
     });
 
     // ---------------------------------
@@ -244,17 +244,14 @@ $(document).ready( function() {
         }
     }
 
-    function removeFromOrder(id) {
+    function removeFromOrder(id, uniqueVal) {
         // First get the menu item object from the list
         console.log(id);
-        var itemToRemove = currOrder.find(function(element){
-            console.log(element);
-            return element['id'] == id;
-        });
-        
+        console.log(uniqueVal);
+
         //Remove from the array
-        var itemIndex = currOrder.indexOf(itemToRemove);
-        var uniqueID = pOrderList[itemIndex];
+        var itemIndex = pOrderList.indexOf(uniqueVal);
+        var itemToRemove = currOrder[itemIndex];
         currOrder.splice(itemIndex, 1);
         pOrderList.splice(itemIndex, 1);
 
@@ -272,7 +269,7 @@ $(document).ready( function() {
         }
 
         //Remove the item from the overview screen
-        $('.order-overview .overview .item[data-id="' + uniqueID + '"]').remove();
+        $('.order-overview .overview .item[data-id="' + uniqueVal + '"]').remove();
 
         //Update the totals and other information
         $('.order-overview .total h2').html('$' +  Math.floor(orderTotal * 100) / 100);      // output the new total at the bottom of the order page (truncated to 2 decimals)
