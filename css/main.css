@@ -91,6 +91,7 @@ header h2 {
     background-size: cover;
     bottom: 0px; left: 0px; right: 0px; top:0px;
     padding: 15px;
+    cursor: pointer;
 }
 
 .start-logo{
@@ -203,13 +204,12 @@ section.menu .menu-area .item:hover {
 
 section.menu .tabs .item {
     display: inline-block;
-    width: 20%;
+    width: 19%; /*Had to change this from 20% to 19% to fit all tabs*/
     text-align: center;
     padding: 15px;
     margin: 0px;
     position: relative;
     cursor: pointer;
-    
 }
 
 section.menu .tabs .item.active:after {
@@ -239,7 +239,7 @@ section.menu .tabs .item:after {
     position: absolute;
     top: 60px;
     left: 0;
-    height: 400px;
+    height: 100px;
     width: 100%;
     z-index: -1;
     border-radius: 20px;
