@@ -188,6 +188,22 @@ $(document).ready( function() {
             return element['id'] == id;
         });
 
+        // NOTE: This only adds the customized options to the 
+        //       html, NOT THE ARRAY - so if we need the 
+        //       customizations later... we can figure that
+        //       out when we get there (ie. GG).
+        var selectedOptions = [];
+        $("input:checkbox[name=type]:checked").each(function(){
+            selectedOptions.push($(this).val());
+        });
+        
+        // Create the string to append to the item summary
+        var customizationString = "";
+        selectedOptions.forEach(function(option){
+            customizationString += option + ', ';       
+        });
+        customizationString = customizationString.slice(0, -2);
+
         // adds the formatted item to the "your order" screen
         $('.order-overview .overview').append(
 
@@ -195,7 +211,7 @@ $(document).ready( function() {
                 '<div class="row">' + 
                     '<div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + '.jpg);"></div>' + 
                     '<div class="col-sm-6 details">' + 
-                        '<h2>' + itemToAdd['title'] + '</h2>' + 
+                        '<h2>' + itemToAdd['title'] + '</h2> ' + customizationString + 
                         '<div class="btn remove-item-from-order" data-id="' + itemToAdd['id'] + '">Remove Item</div>' + 
                     '</div>' + 
                     '<div class="col-sm-3 cost">' + 
