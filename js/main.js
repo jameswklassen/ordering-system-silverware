@@ -110,10 +110,15 @@ $(document).ready( function() {
             let price = item['price'];
             let category = item['category'];
 
-            $("#start").append('<div class="col-sm-6 col-md-4 parent"><div class="item" id="' + id + '" data-category="' + category + '">' + 
-                '<div class="photo" style="background-image: url(img/thumbs/'+ photoName + '.jpg)"></div>' + 
-                '<div class="text">' + '<h1>' +  title + '</h1>' + 
-                '<h2>' + price + '</h2>' + "</div></div>");
+            $("#start").append(
+                '<div class="col-sm-6 col-md-4 parent">' + 
+                    '<div class="item" id="' + id + '" data-category="' + category + '">' + 
+                        '<div class="photo" style="background-image: url(img/thumbs/'+ photoName + '.jpg)"></div>' + 
+                        '<div class="text">' + '<h1>' +  title + '</h1>' + 
+                        '<h2>' + price + '</h2>' + 
+                    '</div>' +
+                '</div>'
+            );
         });
     }
 
