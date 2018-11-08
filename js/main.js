@@ -60,6 +60,8 @@ $(document).ready( function() {
     $("#order, #add-to-order").click( function() {
         // console.log("order");
         if($(".order-overview").is(":visible")){
+            editMode = true;
+            toggleEditMode();
             $(".order-overview").fadeOut();
         } else {
             $(".order-overview").fadeIn();
@@ -202,7 +204,22 @@ $(document).ready( function() {
     }
 
     function removeFromOrder(id) {
+        orderTotal = 0;
         $(".order-overview .overview").empty();
+        $('.order-overview .total h2').html('$' +  Math.floor(orderTotal * 100) / 100);      // output the new total at the bottom of the order page (truncated to 2 decimals)
+        $('#order').addClass('disabled');                
+        $('.btn#order .qty').html('');
+
+        // First get the menu item object from the list
+        var itemToRemove = menuItems.find(function(element){
+            return element['id'] == id;
+        });
+
+        currOrder.splice(currOrder.indexOf(itemToRemove), 1);
+        
+        currOrder.forEach(function(item){
+            addToOrder(item['id']);
+        });
     }
 
     function toggleEditMode() {
