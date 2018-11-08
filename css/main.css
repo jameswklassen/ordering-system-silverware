@@ -1,3 +1,7 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {
     background-color: #000;
     color: #fff;
@@ -15,11 +19,11 @@ body {
     letter-spacing: 2px;
     padding: 15px 20px;
     border-radius: 40px;
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
 .btn:hover {
-    box-shadow: 0 6px 10px rgba(0,0,0,0.10), 0 3px 8px rgba(0,0,0,0.12);   
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.10), 0 3px 8px rgba(0, 0, 0, 0.12);
 }
 
 .btn-container {
@@ -33,31 +37,36 @@ body {
 
 .btn#help {
     background: rgb(255, 176, 30);
-    border-radius: 100%;    
+    border-radius: 100%;
     float: left;
 }
 
 .btn#help:hover {
-    background:  rgb(197, 136, 22);
+    background: rgb(197, 136, 22);
 }
+
 .btn.disabled {
     background: #ddd !important;
     color: #aaa !important;
 }
+
 .btn#order {
     padding: 15px 30px;
     background: rgb(86, 165, 13);
     float: right;
 }
+
 .btn#order:hover {
-    background:  rgb(70, 124, 19)
+    background: rgb(70, 124, 19)
 }
+
 
 /* -------------------------------
 
     Header styles
 
 ------------------------------- */
+
 header .container {
     position: fixed;
     top: 15px;
@@ -72,6 +81,7 @@ header h1 {
     font-weight: 300;
     text-transform: uppercase;
 }
+
 header h2 {
     font-size: 18px;
     font-weight: 100;
@@ -79,24 +89,29 @@ header h2 {
     letter-spacing: 7px;
 }
 
+
 /* -------------------------------
 
     Start Screen styles
 
 ------------------------------- */
-.start-screen{
+
+.start-screen {
     z-index: 16;
     position: fixed;
     background-image: url('../img/bg.jpg');
     background-size: cover;
-    bottom: 0px; left: 0px; right: 0px; top:0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
     padding: 15px;
     cursor: pointer;
 }
 
-.start-logo{
+.start-logo {
     text-align: center;
-    padding:10%;
+    padding: 10%;
 }
 
 .start-name {
@@ -105,14 +120,15 @@ header h2 {
     font-weight: 300;
     text-transform: uppercase;
 }
-.start-title{
+
+.start-title {
     font-size: 30px;
     font-weight: 100;
     text-transform: uppercase;
     letter-spacing: 7px;
 }
 
-.start-message{
+.start-message {
     font-size: 15px;
     font-weight: 200;
     text-transform: uppercase;
@@ -126,6 +142,7 @@ header h2 {
     Menu styles
 
 ------------------------------- */
+
 section.menu {
     position: fixed;
     top: 150px;
@@ -158,11 +175,11 @@ section.menu .menu-area .item {
     z-index: 1;
     padding: 15px;
     cursor: pointer;
-    transition: box-shadow 0.3s cubic-bezier(.25,.8,.25,1);
+    transition: box-shadow 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
 section.menu .menu-area .item:hover {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.20), 0 10px 10px rgba(0,0,0,0.22);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 section.menu .menu-area .item .photo {
@@ -171,7 +188,6 @@ section.menu .menu-area .item .photo {
     margin-bottom: 15px;
     height: 120%;
     background-size: cover;
-
 }
 
 section.menu .menu-area .item .text {
@@ -181,8 +197,11 @@ section.menu .menu-area .item .text {
     background-repeat: repeat-x;
     background-size: contain;
     padding: 15px;
-    bottom: 0px; left: 0px; right: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
 }
+
 section.menu .menu-area .item .text h1 {
     font-size: 20px;
     text-transform: uppercase;
@@ -204,7 +223,8 @@ section.menu .menu-area .item:hover {
 
 section.menu .tabs .item {
     display: inline-block;
-    width: 19%; /*Had to change this from 20% to 19% to fit all tabs*/
+    width: 19%;
+    /*Had to change this from 20% to 19% to fit all tabs*/
     text-align: center;
     padding: 15px;
     margin: 0px;
@@ -232,6 +252,7 @@ section.menu .tabs .item:hover a {
     color: #333;
     text-decoration: none;
 }
+
 section.menu .tabs .item:after {
     content: "";
     display: block;
@@ -250,11 +271,13 @@ section.menu .tabs .item:hover::after {
     top: 0;
 }
 
+
 /* -------------------------------
 
     Menu item popup styles
 
 ------------------------------- */
+
 .popup-modal {
     display: none;
 }
@@ -279,14 +302,17 @@ section.menu .tabs .item:hover::after {
     color: #333;
     overflow-x: hidden !important;
 }
+
 .featherlight-content #item .content {
     padding: 15px;
 }
+
 .featherlight-content #item .info {
     border-bottom: 1px solid #eee;
     margin-bottom: 30px;
     padding-bottom: 30px;
 }
+
 .featherlight-content #item .content h1 {
     text-transform: uppercase;
     font-weight: 900;
@@ -308,10 +334,6 @@ section.menu .tabs .item:hover::after {
     /* margin: 5px 0 15px; */
 }
 
-/* .featherlight-content #item .content .text {
-
-} */
-
 .featherlight-content #item .content .description {
     color: #777;
     font-weight: 200;
@@ -326,6 +348,7 @@ section.menu .tabs .item:hover::after {
     background-color: rgb(228, 228, 228);
 }
 
+
 /* -------------------------------
 
     Help screen popup
@@ -335,7 +358,10 @@ section.menu .tabs .item:hover::after {
 #help-screen {
     z-index: 11;
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     padding: 60px;
     color: #fff;
     display: none;
@@ -353,19 +379,22 @@ section.menu .tabs .item:hover::after {
     display: block;
     text-transform: uppercase;
     margin-bottom: 15px;
-    background: rgba(255,255,255, 0.3);
+    background: rgba(255, 255, 255, 0.3);
     padding: 10px 20px;
     border-radius: 21px;
 }
 
 #help-screen #content a:hover {
-    background: rgba(255,255,255, 0.4);
+    background: rgba(255, 255, 255, 0.4);
     text-decoration: none;
 }
 
 #help-screen #overlay {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: #000;
     opacity: 0.9;
     z-index: -1;

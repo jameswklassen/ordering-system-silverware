@@ -5,14 +5,14 @@ const menuItems = [
         'photoName' : 'hamburger',
         'price' : 14.99,
         'category' : 'entree',
-        'description' : 'Hamburger is a kind of sandwich consisting of grilled cutlets, served inside that cut round loaf. It is usually supplemented with various seasonings, for example, lettuce, ketchup and mayonnaise, slices of pickled cucumber, tomatoes or zucchini, raw or fried onions.',
+        'description' : 'The classic hamburger. Have it served just the way you like it! Papa Roller\'s only uses Grade A Canadian beef. This is a must have classic. Choose from a variety of customizations, such as: ketchup, mustard, onions and pickes.',
         'calories': 400,
         'popularity' : 4,
         'customizations' : {
-            'ketchup' : false,
-            'mustard' : false,
-            'onions' : false,
-            'pickels' : false
+            'Ketchup' : false,
+            'Mustard' : false,
+            'Onions' : false,
+            'Pickles' : false
         }
     },
     {
@@ -21,12 +21,12 @@ const menuItems = [
         'photoName' : 'blt',
         'price' : 9.99,
         'category' : 'entree',
-        'description' : 'A BLT is a type of sandwich, named for the initials of its primary ingredients, bacon, lettuce and tomato. It can be made with varying recipes according to personal preference. Simple variants include using different types of lettuce, toasting or not, or adding mayonnaise.',
+        'description' : 'Ah yes! The BLT, the absolute classic sandwhich. Available at restaurants worldwide, but the Papa Roller twist is a MUST try. This delicious entree consists of a bacon, lettuce and tomato heaven. Served with your choice of: ketchup and turkey.',
         'calories': 300,
         'popularity' : 4,
         'customizations' : {
-            'ketchup' : false,
-            'bacon' : false
+            'Ketchup' : false,
+            'Turkey' : false
         }
     },
     {
@@ -35,12 +35,13 @@ const menuItems = [
         'photoName' : 'steak',
         'price' : 19.99,
         'category' : 'entree',
-        'description' : 'A steak is a meat generally sliced across the muscle fibers, potentially including a bone',
+        'description' : 'Of course we have Steak! It would not be fine dining without it! Come and enjoy our fine Grade A Canadian beef. Served with mushrooms and/or bernay sauce, and cooked to your exact specifications. Come and discover fine dining with Papa Roller.',
         'calories': 600,
         'popularity' : 10,
         'customizations' : {
             'mushrooms' : false,
             'bernay-sauce' : false
+            // Need to add well done, medium rare, rare, etc.
         }
     },
     {
@@ -49,7 +50,7 @@ const menuItems = [
         'photoName' : 'baked-mac-blur-bowl',
         'price' : 13.95,
         'category' : 'starter',
-        'description' : 'Its too good to pass up',
+        'description' : 'The classic american comfort food, made by the legendary Papa Roller. This mac and cheese recipe has been passed down from Roller to Roller and you can discover the mythos behind it today! Served optionally with ketchup, this is a must try item. Ooey gooey cheesey goodness!',
         'calories': 450,
         'popularity' : 2,
         'customizations' : {
@@ -62,7 +63,7 @@ const menuItems = [
         'photoName' : 'barbecue-bbq-chicken',
         'price' : 24.99,
         'category' : 'entree',
-        'description' : 'Barbecue chicken consists of chicken parts or entire chickens that are barbecued, grilled or smoked. There are many global and regional preparation techniques and cooking styles. Barbecue chicken is often seasoned or coated in a spice rub, barbecue sauce, or both',
+        'description' : 'Chicken + Papa Roller\'s WORLD FAMOUS BBQ SAUCE! Truly a match made in heaven. Try the legendary meal that yelp reviews are raving about! Soft and "melt in your mouth" chicken, combined with the tangy, zesty and sweet BBQ sauce. You\'ve never tasted chicken like this before.',
         'calories': 450,
         'popularity' : 10,
         'customizations' : {
@@ -72,24 +73,24 @@ const menuItems = [
     },
     {
         'id' : 5,
-        'title' : 'Blue berry Icecream',
+        'title' : 'Blueberry Ice Cream',
         'photoName' : 'berries-blackberries-blueberries',
         'price' : 10.99,
         'category' : 'dessert',
-        'description' : 'Creamy blueberry ice cream is a summer treat that you simply need to taste to believe',
+        'description' : 'Creamy blueberry ice cream is a summer treat that you simply need to taste to believe. Made fresh in Papa\'s kitchen!',
         'calories': 300,
         'popularity' : 5,
         'customizations' : {
-            'strawberries' : false
+            'caramel-drizzle' : false
         }
     },
     {
         'id' : 6,
-        'title' : 'Wipe cream and Berries',
+        'title' : 'Whipped Cream and Berries',
         'photoName' : 'berries-bowl-cream',
         'price' : 4.99,
         'category' : 'dessert',
-        'description' : 'Creamy wipe cream and berries is a summer treat that you simply need to taste to believe',
+        'description' : 'A simple dessert. Berries + Whipped Cream. So simple and so delicious. The Papa did not dissapoint.',
         'calories': 800,
         'popularity' : 10,
         'customizations' : {}
@@ -100,7 +101,7 @@ const menuItems = [
         'photoName' : 'birthday-birthday-cake-cake',
         'price' : 20.99,
         'category' : 'dessert',
-        'description' : 'An ice cream cake is ice cream in the shape of a cake with layers of sponge cake or cookie crumble in between. A popular form is a three-layer cake, with a layer of ice cream between two layers of cake. In a typical assembly, the cake component is baked in the normal way, cut to shape if necessary, and then frozen',
+        'description' : 'Papa Roller makes cakes too? No way. This is a must try menu item. The same simple, elegant, and crispy ice cream made right in Papa\'s kitchen, doing double duty as a cake. What more could one ask for?',
         'calories': 1000,
         'popularity' : 7,
         'customizations' : {}
@@ -111,7 +112,7 @@ const menuItems = [
         'photoName' : 'bowl-close-up-dark',
         'price' : 3.99,
         'category' : 'dessert',
-        'description' : 'Have half of a cup of ice cream and really enjoy it rather than eating a tub of sugary frozen yogurt,” Brissette advised. Sorbet and sherbet are better choices stacked next to ice cream and gelato, the experts say. They\'re made with fruit, water and sugar, or low fat milk and generally have less fat than ice cream.',
+        'description' : '"Have half of a cup of ice cream and really enjoy it rather than eating a tub of sugary frozen yogurt!" -Papa Roller. We were born and raised on the Papa Roller mythos and he\'s been saying this for as long as we can remember. So why not enjoy the crispy, simple and elegant ice cream that the Papa has been dishing out for years. Made right here in Papa\'s kitchen.',
         'calories': 240,
         'popularity' : 6,
         'customizations' : {
@@ -124,7 +125,7 @@ const menuItems = [
         'photoName' : 'cake-chocolate-chocolate-cake',
         'price' : 5.99,
         'category' : 'dessert',
-        'description' : 'Chocolate cake or chocolate gâteau is a cake flavored with melted chocolate, cocoa powder, or both',
+        'description' : 'Chocolate cake made fresh right in the Papa\'s kitchen. Yes, you\'re probably thinking, "How does Papa Roller have the time to do all this fresh cooking?", the answer? The hustle never stops. So yeah, of course we make chocolate cake and we do it right. Come and taste this cocoa delight.',
         'calories': 400,
         'popularity' : 8,
         'customizations' : {}
@@ -135,7 +136,7 @@ const menuItems = [
         'photoName' : 'close-up-cooking-dinner',
         'price' : 20.99,
         'category' : 'entree',
-        'description' : 'Larger fish, such as tuna, swordfish, salmon, cod and mahi-mahi, are often cut into steaks. Fish steaks can be grilled, pan-fried, broiled or baked. While beef steak takes time to cook and can be tough, fish cooks rapidly, is tender, and tends to fall apart. ... Unlike beef steak, fish steaks are often baked in a sauce.',
+        'description' : 'Like Steak? Like Fish? Like Salmon? You won\'t be dissapointed at the latest addition to the Papa Roller name. This flaky, tender and delicious menu offering will leave your mouth water for more.',
         'calories': 430,
         'popularity' : 4,
         'customizations' : {
@@ -148,7 +149,7 @@ const menuItems = [
         'photoName' : 'coca-cola-coke-cold',
         'price' : 3.99,
         'category' : 'drink',
-        'description' : 'Coca-Cola, or Coke is a carbonated soft drink manufactured by The Coca-Cola Company. Originally intended as a patent medicine, it was invented in the late 19th century by John Pemberton',
+        'description' : 'The classic. The classic is in the house. Discover happiness as you combine the mouth-watering flavours of Papa\'s kitchen with the sweet simple taste of carbonated sugar. At Papa Roller\'s we won\'t ask: "Is Pepsi okay?" we have the real stuff, and we\'re not afraid to show it.',
         'calories': 256,
         'popularity' : 3,
         'customizations' : {
@@ -162,7 +163,7 @@ const menuItems = [
         'photoName' : 'alcohol-beer-beverage',
         'price' : 8.99,
         'category' : 'drink',
-        'description' : 'Beer is one of the oldest and most widely consumed alcoholic drinks in the world, and the third most popular drink overall after water and tea. Beer is brewed from cereal grains—most commonly from malted barley, though wheat, maize, and rice are also used',
+        'description' : 'What else would one need after a long hard day at the office. A cold beer to crack with the boy\'s. In Papa\'s home, we always have plenty of beer. Brewed right here, by Papa Roller himself. Our Cold Beer is our most popular and most refreshing beverages.',
         'calories': 90,
         'popularity' : 10,
         'customizations' : {}
