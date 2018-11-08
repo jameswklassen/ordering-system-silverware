@@ -39,6 +39,21 @@
     background-color: #0068d6;
 }
 
+.order-overview #add-to-order {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.order-overview .remove-item-from-order {
+    background: #ED5E68;
+    color: #fff;
+    padding: 5px 15px;
+    font-size: 11px;
+    display: block;
+    width: 35%;
+    transition: opacity 0s;
+}
+
 .order-overview .overview {
     /* background: #efefef; */
     padding: 30px;
@@ -65,7 +80,6 @@
     border-radius: 10px;
 }
 
-
 .order-overview .overview .item .details {
     padding-left: 30px;
 }
@@ -89,7 +103,6 @@
     text-align: right;
     padding-right: 30px;
 }
-
 
 @media only screen and (max-width: 768px){
     .btn {

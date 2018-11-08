@@ -1,8 +1,22 @@
-var currOrder = new Array();    // holds the current order
-var orderTotal = 0.0;           // the total cost of the order
+
+var currOrder = new Array();            // holds the current order
+var otherOrder = new Array();            // holds a copy of the current order
+var orderTotal = 0.0;                   // the total cost of the order
 var popThreshold = 8;           // Minimum popularity rating for items to be in popular tab
+var editMode = false;
+
 
 $(document).ready( function() {
+
+    $('.menu-area').height($(window).height() - 400);               // resizes the menu area based on window height
+    $('.overview').height($(window).height() - 475);
+
+    // Whenever the window is resized, resize the menu area
+    $(window).resize(function () {
+        $('.menu-area').height($(window).height() - 400);
+        $('.overview').height($(window).height() - 475);
+    });
+
     init();                     // initialize 
     drawMenu('starter');        // set the initial category to "starters"
 
@@ -58,8 +72,10 @@ $(document).ready( function() {
 
     // Order button
     $("#order, #add-to-order").click( function() {
-        console.log("order");
+        // console.log("order");
         if($(".order-overview").is(":visible")){
+            editMode = true;
+            toggleEditMode();
             $(".order-overview").fadeOut();
         } else {
             $(".order-overview").fadeIn();
@@ -97,6 +113,16 @@ $(document).ready( function() {
         $.featherlight.close();
     });
 
+    $('#edit-order').click( function() {
+        toggleEditMode();
+        // console.log($(this).attr('data-id'));
+    });
+
+    // Removes an item from an order when the "remove item" button is clicked
+    $('.order-overview').on("click", ".remove-item-from-order", function() {
+        removeFromOrder($(this).attr('data-id'));
+    });
+
     // ---------------------------------
     //      Initialization code
     // ---------------------------------
@@ -109,10 +135,15 @@ $(document).ready( function() {
             let price = item['price'];
             let category = item['category'];
 
-            $("#start").append('<div class="col-sm-6 col-md-4 parent"><div class="item" id="' + id + '" data-category="' + category + '">' + 
-                '<div class="photo" style="background-image: url(img/thumbs/'+ photoName + '.jpg)"></div>' + 
-                '<div class="text">' + '<h1>' +  title + '</h1>' + 
-                '<h2>' + price + '</h2>' + "</div></div>");
+            $("#start").append(
+                '<div class="col-sm-6 col-md-4 parent">' + 
+                    '<div class="item" id="' + id + '" data-category="' + category + '">' + 
+                        '<div class="photo" style="background-image: url(img/thumbs/'+ photoName + '.jpg)"></div>' + 
+                        '<div class="text">' + '<h1>' +  title + '</h1>' + 
+                        '<h2>' + price + '</h2>' + 
+                    '</div>' +
+                '</div>'
+            );
         });
     }
 
@@ -157,35 +188,30 @@ $(document).ready( function() {
             return element['id'] == id;
         });
 
-        // NOTE: This only adds the customized options to the 
-        //       html, NOT THE ARRAY - so if we need the 
-        //       customizations later... we can figure that
-        //       out when we get there (ie. GG).
-        var selectedOptions = [];
-        $("input:checkbox[name=type]:checked").each(function(){
-            selectedOptions.push($(this).val());
-        });
-
-        // Create the string to append to the item summary
-        var customizationString = "";
-        selectedOptions.forEach(function(option){
-            customizationString += option + ', ';       
-        });
-        customizationString = customizationString.slice(0, -2);
-
-        // A big mess of code......
-        // This adds the formatted item 
-        // to the "your order" screen
+        // adds the formatted item to the "your order" screen
         $('.order-overview .overview').append(
-            '<div class="item"><div class="row"><div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + 
-            '.jpg);"></div><div class="col-sm-6 details"><h2>' + itemToAdd['title'] + '</h2>' + customizationString + '</div><div class="col-sm-3 cost"><h3>$' + itemToAdd['price'] + '</h3>' + 
-            '</div></div>'
+
+            '<div class="item">' + 
+                '<div class="row">' + 
+                    '<div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + '.jpg);"></div>' + 
+                    '<div class="col-sm-6 details">' + 
+                        '<h2>' + itemToAdd['title'] + '</h2>' + 
+                        '<div class="btn remove-item-from-order" data-id="' + itemToAdd['id'] + '">Remove Item</div>' + 
+                    '</div>' + 
+                    '<div class="col-sm-3 cost">' + 
+                        '<h3>$' + itemToAdd['price'] + '</h3>' + 
+                    '</div>' + 
+                '</div>' + 
+            '</div>'
         );
+        
+        $('.remove-item-from-order').hide();
 
         currOrder.push(itemToAdd);                                  // add the item to the customers order
         orderTotal += itemToAdd['price'];                           // add the cost of the item to the total cost
-        orderTotal = Math.floor(orderTotal * 100) / 100;            // truncate total to 2 decimals
-        $('.order-overview .total h2').html('$' + orderTotal);      // output the new total at the bottom of the order page
+
+        $('.order-overview .total h2').html('$' +  Math.floor(orderTotal * 100) / 100);      // output the new total at the bottom of the order page (truncated to 2 decimals)
+
 
         if(currOrder.length > 0){
             $('#order').removeClass('disabled');                    // make the order button green when an order has items in it
@@ -199,4 +225,38 @@ $(document).ready( function() {
             $('.btn#order .qty').html('');
         }
     }
+
+    function removeFromOrder(id) {
+        orderTotal = 0;
+        $(".order-overview .overview").empty();
+        $('.order-overview .total h2').html('$' +  Math.floor(orderTotal * 100) / 100);      // output the new total at the bottom of the order page (truncated to 2 decimals)
+        $('#order').addClass('disabled');                
+        $('.btn#order .qty').html('');
+
+        // First get the menu item object from the list
+        var itemToRemove = menuItems.find(function(element){
+            return element['id'] == id;
+        });
+
+        currOrder.splice(currOrder.indexOf(itemToRemove), 1);
+        
+        currOrder.forEach(function(item){
+            addToOrder(item['id']);
+        });
+    }
+
+    function toggleEditMode() {
+        if(!editMode)
+        {
+            $('#edit-order').html("cancel editing")
+            $('.order-overview .overview .remove-item-from-order').fadeIn();
+            editMode = true;
+        } else
+        {
+            $('#edit-order').html("edit <i class=\"fas fa-edit\"></i>")
+            $('.order-overview .overview .remove-item-from-order').fadeOut();
+            editMode = false;
+        }
+    }
+
 });
