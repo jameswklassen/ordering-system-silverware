@@ -28,13 +28,25 @@ $(document).ready( function() {
             $(modal + ' .row .description').html(item['description']);
             $(modal + ' .row .nutrition').html('Item Calories: ' + item['calories']);
             $(modal + ' .image').css('background-image', 'url("img/' + item['photoName'] + '.jpg")');
-            $(modal + ' #add-item-to-order').attr('data-id', item['id']);
+            // $(modal + ' #add-item-to-order').attr('data-id', item['id']);
+
+            // Create the customization options
+            var customizations = Object.keys(item['customizations']);
+            
+            // Populate the customizations
+            $(modal + ' .row .customizations').html('');
+            customizations.forEach(function(option){
+                $(modal + ' .row .customizations').append('<input type="checkbox" name="type" value="' + option + '">'+option+'<br>');
+            });
+            $(modal + ' .row .customizations').hide();
+            
+            // Hide the submit button
+            $(modal + ' #submit-order').attr('data-id', id);
+            $(modal + ' #submit-order').hide();
         }
     });
 
     $('.menu .tabs .item').click( function() {
-        // console.log(  );
-        // $('#start').html('');
         $('.menu .tabs .item').removeClass('active');
         $(this).addClass('active');
         drawMenu($(this).find('a').attr('href').substring(1));
@@ -72,8 +84,17 @@ $(document).ready( function() {
     });
 
     $('#add-item-to-order').click( function() {
-        addToOrder($(this).attr('data-id'));
+        $('.featherlight-content #item .row .nutrition').hide();
+        $('.featherlight-content #item .row .description').hide();
+        $('.featherlight-content #item .row .customizations').show();
+        $('.featherlight-content #item #add-item-to-order').hide();
+        $('.featherlight-content #item #submit-order').show();
+    });
+
+    $('#submit-order').click(function(){
         // console.log($(this).attr('data-id'));
+        addToOrder($(this).attr('data-id'));
+        $.featherlight.close();
     });
 
     // ---------------------------------
@@ -136,13 +157,29 @@ $(document).ready( function() {
             return element['id'] == id;
         });
 
+        // NOTE: This only adds the customized options to the 
+        //       html, NOT THE ARRAY - so if we need the 
+        //       customizations later... we can figure that
+        //       out when we get there (ie. GG).
+        var selectedOptions = [];
+        $("input:checkbox[name=type]:checked").each(function(){
+            selectedOptions.push($(this).val());
+        });
+
+        // Create the string to append to the item summary
+        var customizationString = "";
+        selectedOptions.forEach(function(option){
+            customizationString += option + ', ';       
+        });
+        customizationString = customizationString.slice(0, -2);
+
         // A big mess of code......
         // This adds the formatted item 
         // to the "your order" screen
         $('.order-overview .overview').append(
             '<div class="item"><div class="row"><div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + 
-            '.jpg);"></div><div class="col-sm-6 details"><h2>' + itemToAdd['title'] + '</h2></div><div class="col-sm-3 cost"><h3>$' + itemToAdd['price'] + '</h3>' + 
-            '</div></div></div>'
+            '.jpg);"></div><div class="col-sm-6 details"><h2>' + itemToAdd['title'] + '</h2>' + customizationString + '</div><div class="col-sm-3 cost"><h3>$' + itemToAdd['price'] + '</h3>' + 
+            '</div></div>'
         );
 
         currOrder.push(itemToAdd);                                  // add the item to the customers order
