@@ -7,7 +7,13 @@ const menuItems = [
         'category' : 'entree',
         'description' : 'Hamburger is a kind of sandwich consisting of grilled cutlets, served inside that cut round loaf. It is usually supplemented with various seasonings, for example, lettuce, ketchup and mayonnaise, slices of pickled cucumber, tomatoes or zucchini, raw or fried onions.',
         'calories': 400,
-        'popularity' : 4
+        'popularity' : 4,
+        'customizations' : {
+            'ketchup' : false,
+            'mustard' : false,
+            'onions' : false,
+            'pickels' : false
+        }
     },
     {
         'id' : 1,
@@ -17,7 +23,11 @@ const menuItems = [
         'category' : 'entree',
         'description' : 'A BLT is a type of sandwich, named for the initials of its primary ingredients, bacon, lettuce and tomato. It can be made with varying recipes according to personal preference. Simple variants include using different types of lettuce, toasting or not, or adding mayonnaise.',
         'calories': 300,
-        'popularity' : 4
+        'popularity' : 4,
+        'customizations' : {
+            'ketchup' : false,
+            'bacon' : false
+        }
     },
     {
         'id' : 2,
@@ -27,7 +37,11 @@ const menuItems = [
         'category' : 'entree',
         'description' : 'A steak is a meat generally sliced across the muscle fibers, potentially including a bone',
         'calories': 600,
-        'popularity' : 10
+        'popularity' : 10,
+        'customizations' : {
+            'mushrooms' : false,
+            'bernay-sauce' : false
+        }
     },
     {
         'id' : 3,
@@ -37,7 +51,10 @@ const menuItems = [
         'category' : 'starter',
         'description' : 'Its too good to pass up',
         'calories': 450,
-        'popularity' : 2
+        'popularity' : 2,
+        'customizations' : {
+            'ketchup' : false
+        }
     },
     {
         'id' : 4,
@@ -47,7 +64,11 @@ const menuItems = [
         'category' : 'entree',
         'description' : 'Barbecue chicken consists of chicken parts or entire chickens that are barbecued, grilled or smoked. There are many global and regional preparation techniques and cooking styles. Barbecue chicken is often seasoned or coated in a spice rub, barbecue sauce, or both',
         'calories': 450,
-        'popularity' : 10
+        'popularity' : 10,
+        'customizations' : {
+            'ketchup' : false,
+            'extra-bbq' : false
+        }
     },
     {
         'id' : 5,
@@ -57,7 +78,10 @@ const menuItems = [
         'category' : 'dessert',
         'description' : 'Creamy blueberry ice cream is a summer treat that you simply need to taste to believe',
         'calories': 300,
-        'popularity' : 5
+        'popularity' : 5,
+        'customizations' : {
+            'strawberries' : false
+        }
     },
     {
         'id' : 6,
@@ -67,7 +91,8 @@ const menuItems = [
         'category' : 'dessert',
         'description' : 'Creamy wipe cream and berries is a summer treat that you simply need to taste to believe',
         'calories': 800,
-        'popularity' : 10
+        'popularity' : 10,
+        'customizations' : {}
     },
     {
         'id' : 7,
@@ -77,7 +102,8 @@ const menuItems = [
         'category' : 'dessert',
         'description' : 'An ice cream cake is ice cream in the shape of a cake with layers of sponge cake or cookie crumble in between. A popular form is a three-layer cake, with a layer of ice cream between two layers of cake. In a typical assembly, the cake component is baked in the normal way, cut to shape if necessary, and then frozen',
         'calories': 1000,
-        'popularity' : 7
+        'popularity' : 7,
+        'customizations' : {}
     },
     {
         'id' : 8,
@@ -87,7 +113,10 @@ const menuItems = [
         'category' : 'dessert',
         'description' : 'Have half of a cup of ice cream and really enjoy it rather than eating a tub of sugary frozen yogurt,” Brissette advised. Sorbet and sherbet are better choices stacked next to ice cream and gelato, the experts say. They\'re made with fruit, water and sugar, or low fat milk and generally have less fat than ice cream.',
         'calories': 240,
-        'popularity' : 6
+        'popularity' : 6,
+        'customizations' : {
+            'strawberries' : false
+        }
     },
     {
         'id' : 9,
@@ -97,7 +126,8 @@ const menuItems = [
         'category' : 'dessert',
         'description' : 'Chocolate cake or chocolate gâteau is a cake flavored with melted chocolate, cocoa powder, or both',
         'calories': 400,
-        'popularity' : 8
+        'popularity' : 8,
+        'customizations' : {}
     },
     {
         'id' : 10,
@@ -107,7 +137,10 @@ const menuItems = [
         'category' : 'entree',
         'description' : 'Larger fish, such as tuna, swordfish, salmon, cod and mahi-mahi, are often cut into steaks. Fish steaks can be grilled, pan-fried, broiled or baked. While beef steak takes time to cook and can be tough, fish cooks rapidly, is tender, and tends to fall apart. ... Unlike beef steak, fish steaks are often baked in a sauce.',
         'calories': 430,
-        'popularity' : 4
+        'popularity' : 4,
+        'customizations' : {
+            'dill' : false
+        }
     },
     {
         'id' : 11,
@@ -117,7 +150,11 @@ const menuItems = [
         'category' : 'drink',
         'description' : 'Coca-Cola, or Coke is a carbonated soft drink manufactured by The Coca-Cola Company. Originally intended as a patent medicine, it was invented in the late 19th century by John Pemberton',
         'calories': 256,
-        'popularity' : 3
+        'popularity' : 3,
+        'customizations' : {
+            'ice' : false,
+            'straw' : false
+        }
     },
     {
         'id' : 12,
@@ -127,6 +164,7 @@ const menuItems = [
         'category' : 'drink',
         'description' : 'Beer is one of the oldest and most widely consumed alcoholic drinks in the world, and the third most popular drink overall after water and tea. Beer is brewed from cereal grains—most commonly from malted barley, though wheat, maize, and rice are also used',
         'calories': 90,
-        'popularity' : 10
+        'popularity' : 10,
+        'customizations' : {}
     }
 ];

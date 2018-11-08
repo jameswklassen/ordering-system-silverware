@@ -5,6 +5,7 @@ var orderTotal = 0.0;                   // the total cost of the order
 var popThreshold = 8;           // Minimum popularity rating for items to be in popular tab
 var editMode = false;
 
+
 $(document).ready( function() {
 
     $('.menu-area').height($(window).height() - 400);               // resizes the menu area based on window height
@@ -41,7 +42,21 @@ $(document).ready( function() {
             $(modal + ' .row .description').html(item['description']);
             $(modal + ' .row .nutrition').html('Item Calories: ' + item['calories']);
             $(modal + ' .image').css('background-image', 'url("img/' + item['photoName'] + '.jpg")');
-            $(modal + ' #add-item-to-order').attr('data-id', item['id']);
+            // $(modal + ' #add-item-to-order').attr('data-id', item['id']);
+
+            // Create the customization options
+            var customizations = Object.keys(item['customizations']);
+            
+            // Populate the customizations
+            $(modal + ' .row .customizations').html('');
+            customizations.forEach(function(option){
+                $(modal + ' .row .customizations').append('<input type="checkbox" name="type" value="' + option + '">'+option+'<br>');
+            });
+            $(modal + ' .row .customizations').hide();
+            
+            // Hide the submit button
+            $(modal + ' #submit-order').attr('data-id', id);
+            $(modal + ' #submit-order').hide();
         }
     });
 
@@ -85,14 +100,21 @@ $(document).ready( function() {
     });
 
     $('#add-item-to-order').click( function() {
-        addToOrder($(this).attr('data-id'));
+        $('.featherlight-content #item .row .nutrition').hide();
+        $('.featherlight-content #item .row .description').hide();
+        $('.featherlight-content #item .row .customizations').show();
+        $('.featherlight-content #item #add-item-to-order').hide();
+        $('.featherlight-content #item #submit-order').show();
+    });
+
+    $('#submit-order').click(function(){
         // console.log($(this).attr('data-id'));
+        addToOrder($(this).attr('data-id'));
+        $.featherlight.close();
     });
 
     $('#edit-order').click( function() {
-        if(currOrder.length > 0) {
-            toggleEditMode();
-        }
+        toggleEditMode();
         // console.log($(this).attr('data-id'));
     });
 
@@ -166,6 +188,22 @@ $(document).ready( function() {
             return element['id'] == id;
         });
 
+        // NOTE: This only adds the customized options to the 
+        //       html, NOT THE ARRAY - so if we need the 
+        //       customizations later... we can figure that
+        //       out when we get there (ie. GG).
+        var selectedOptions = [];
+        $("input:checkbox[name=type]:checked").each(function(){
+            selectedOptions.push($(this).val());
+        });
+        
+        // Create the string to append to the item summary
+        var customizationString = "";
+        selectedOptions.forEach(function(option){
+            customizationString += option + ', ';       
+        });
+        customizationString = customizationString.slice(0, -2);
+
         currOrder.push(itemToAdd);                                  // add the item to the customers order
         var uniqueID = getID();
         pOrderList.push(uniqueID);
@@ -176,7 +214,7 @@ $(document).ready( function() {
                 '<div class="row">' + 
                     '<div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + '.jpg);"></div>' + 
                     '<div class="col-sm-6 details">' + 
-                        '<h2>' + itemToAdd['title'] + '</h2>' + 
+                        '<h2>' + itemToAdd['title'] + '</h2> ' + customizationString + 
                         '<div class="btn remove-item-from-order" data-id="' + itemToAdd['id'] + '">Remove Item</div>' + 
                     '</div>' + 
                     '<div class="col-sm-3 cost">' + 
@@ -191,6 +229,7 @@ $(document).ready( function() {
         orderTotal += itemToAdd['price'];                           // add the cost of the item to the total cost
 
         $('.order-overview .total h2').html('$' +  Math.floor(orderTotal * 100) / 100);      // output the new total at the bottom of the order page (truncated to 2 decimals)
+
 
         if(currOrder.length > 0){
             $('#order').removeClass('disabled');                    // make the order button green when an order has items in it

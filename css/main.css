@@ -259,6 +259,10 @@ section.menu .tabs .item:hover::after {
     display: none;
 }
 
+#submit-order {
+    float: right;
+}
+
 .featherlight {
     z-index: 10 !important;
 }
@@ -304,10 +308,9 @@ section.menu .tabs .item:hover::after {
     /* margin: 5px 0 15px; */
 }
 
-.featherlight-content #item .content .text {
+/* .featherlight-content #item .content .text {
 
-
-}
+} */
 
 .featherlight-content #item .content .description {
     color: #777;
