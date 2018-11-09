@@ -1,18 +1,23 @@
 .order-overview {
     display: none;
     padding-top: 60px;
-    padding-bottom: 120px;    
+    padding-bottom: 120px;
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: #fff;
     z-index: 12;
     color: #333;
 }
+
 .order-overview .header {
     border-bottom: 1px solid #eee;
     padding-bottom: 60px;
     margin-bottom: 60px;
 }
+
 .order-overview h1 {
     font-size: 47px;
     font-weight: 900;
@@ -27,6 +32,7 @@
     background-color: #efefef;
     color: #888;
 }
+
 .order-overview #edit-order:hover {
     background-color: #d8d8d8;
 }
@@ -35,12 +41,37 @@
     background-color: #007bff;
     color: #fff;
 }
+
 .order-overview #add-to-order:hover {
     background-color: #0068d6;
 }
 
+.order-overview #add-to-order {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.order-overview .remove-item-from-order {
+    background: #ED5E68;
+    color: #fff;
+    padding: 5px 15px;
+    font-size: 11px;
+    display: inline-block;
+    width: auto;
+    transition: opacity 0s;
+}
+.order-overview .edit-item-in-order {
+    background-color: #efefef;
+    color: #888;
+    padding: 5px 15px;
+    font-size: 11px;
+    display: inline-block;
+    width: auto;
+    transition: opacity 0s;
+    margin: 0 10px;
+}
+
 .order-overview .overview {
-    /* background: #efefef; */
     padding: 30px;
     border-radius: 20px;
     margin-bottom: 30px;
@@ -65,7 +96,6 @@
     border-radius: 10px;
 }
 
-
 .order-overview .overview .item .details {
     padding-left: 30px;
 }
@@ -74,6 +104,8 @@
     /* text-transform: uppercase; */
     font-size: 24px;
     font-weight: 900;
+    display: inline-block;
+    /* margin-right: 15px; */
 }
 
 .order-overview .overview .item .cost {
@@ -90,8 +122,7 @@
     padding-right: 30px;
 }
 
-
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 768px) {
     .btn {
         margin-bottom: 15px;
     }
