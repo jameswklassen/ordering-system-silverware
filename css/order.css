@@ -56,13 +56,22 @@
     color: #fff;
     padding: 5px 15px;
     font-size: 11px;
-    display: block;
-    width: 35%;
+    display: inline-block;
+    width: auto;
     transition: opacity 0s;
+}
+.order-overview .edit-item-in-order {
+    background-color: #efefef;
+    color: #888;
+    padding: 5px 15px;
+    font-size: 11px;
+    display: inline-block;
+    width: auto;
+    transition: opacity 0s;
+    margin: 0 10px;
 }
 
 .order-overview .overview {
-    /* background: #efefef; */
     padding: 30px;
     border-radius: 20px;
     margin-bottom: 30px;
@@ -95,6 +104,8 @@
     /* text-transform: uppercase; */
     font-size: 24px;
     font-weight: 900;
+    display: inline-block;
+    /* margin-right: 15px; */
 }
 
 .order-overview .overview .item .cost {

@@ -42,7 +42,7 @@ $(document).ready(function()
 			$.featherlight($('.popup-modal #item'), {});
 			var modal = '.featherlight-content #item';
 			$(modal + ' h1').html(item['title']);
-			$(modal + ' h2.cost').html(item['price']);
+			$(modal + ' h2.cost').html('$' + item['price']);
 			$(modal + ' .row .description').html(item['description']);
 			$(modal + ' .row .nutrition').html('Item Calories: ' + item['calories']);
 			$(modal + ' .image').css('background-image', 'url("img/' + item['photoName'] + '.jpg")');
@@ -55,10 +55,18 @@ $(document).ready(function()
 			$(modal + ' .row .customizations').html('');
 			customizations.forEach(function(option)
 			{
-				$(modal + ' .row .customizations').append('<input type="checkbox" name="type" value="' + option + '">' + option + '<br>');
+
+				var newOption = parseOption(option);
+				$(modal + ' .row .customizations').append(
+					'<label class="button-container">' + newOption + 
+						'<input type="checkbox" name="type" value="' + newOption + '">' + 
+						'<span class="checkmark"></span>' + 
+					'</label>'
+						//  '<br>'
+				);
+
 			});
 			$(modal + ' .row .customizations').hide();
-
 			// Hide the submit button
 			$(modal + ' #submit-order').attr('data-id', id);
 			$(modal + ' #submit-order').hide();
@@ -172,7 +180,7 @@ $(document).ready(function()
                     '<div class="item" id="' + id + '" data-category="' + category + '">' +
 				        '<div class="photo" style="background-image: url(img/thumbs/' + photoName + '.jpg)"></div>' +
 				        '<div class="text">' + '<h1>' + title + '</h1>' +
-				            '<h2>' + price + '</h2>' +
+				            '<h2>$' + price + '</h2>' +
 				        '</div>' +
                     '</div>' +
                 '</div>'
@@ -252,9 +260,14 @@ $(document).ready(function()
 		var customizationString = "";
 		selectedOptions.forEach(function(option)
 		{
-			customizationString += option + ', ';
+
+			var newOption = parseOption(option);
+			customizationString += newOption + ', ';
 		});
+		console.log(customizationString);
 		customizationString = customizationString.slice(0, -2);
+		console.log(customizationString);
+
 
 		currOrder.push(itemToAdd); // add the item to the customers order
 		var uniqueID = getID(); // Generate a unique ID for this item
@@ -265,11 +278,13 @@ $(document).ready(function()
 			'<div class="item" data-id="' + uniqueID + '">' +
 			    '<div class="row">' +
 			        '<div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + '.jpg);"></div>' +
-			        '<div class="col-sm-6 details">' +
-			            '<h2>' + itemToAdd['title'] + '</h2> ' + customizationString +
-                        '<div class="btn remove-item-from-order" data-id="' + itemToAdd['id'] + '">Remove Item</div>' +
+			        '<div class="col-sm-8 details">' +
+			            '<h2>' + itemToAdd['title'] + '</h2> ' +
+						'<div class="btn edit-item-in-order" data-id="' + itemToAdd['id'] + '">edit <i class="fas fa-edit"></i></div>' +
+						'<div class="btn remove-item-from-order" data-id="' + itemToAdd['id'] + '">Remove Item <i class="fas fa-trash"></i></div><br>' +
+						customizationString +
                     '</div>' +
-			        '<div class="col-sm-3 cost">' +
+			        '<div class="col-sm-1 cost">' +
 			            '<h3>$' + itemToAdd['price'] + '</h3>' +
 			        '</div>' +
 			    '</div>' +
@@ -278,6 +293,8 @@ $(document).ready(function()
         
         // Hide the remove buttons
 		$('.remove-item-from-order').hide();
+		$('.edit-item-in-order').hide();
+    
 		orderTotal += itemToAdd['price']; // add the cost of the item to the total cost
 		$('.order-overview .total h2').html('$' + Math.floor(orderTotal * 100) / 100); // output the new total at the bottom of the order page (truncated to 2 decimals)
 
@@ -309,8 +326,12 @@ $(document).ready(function()
 		currOrder.splice(itemIndex, 1);
 		pOrderList.splice(itemIndex, 1);
 
-		//Find the new order total
+		console.log(itemToRemove['price']);
+
+		//Find the new order total and update it on the my order screen
 		orderTotal -= itemToRemove['price'];
+		$('.order-overview .total h2').html('$' + Math.floor(orderTotal * 100) / 100);
+
 
 		//Fix negative numbers
 		if(orderTotal < 0)
@@ -357,12 +378,15 @@ $(document).ready(function()
 		{
 			$('#edit-order').html("cancel editing")
 			$('.order-overview .overview .remove-item-from-order').fadeIn();
+			$('.order-overview .overview .edit-item-in-order').fadeIn();
 			editMode = true;
 		}
 		else
 		{
 			$('#edit-order').html("edit <i class=\"fas fa-edit\"></i>")
 			$('.order-overview .overview .remove-item-from-order').fadeOut();
+			$('.order-overview .overview .edit-item-in-order').fadeOut();
+
 			editMode = false;
 		}
 	}
@@ -377,5 +401,16 @@ $(document).ready(function()
 			text += values.charAt(Math.floor(Math.random() * values.length));
 		}
 		return text;
+	}
+
+	function parseOption(option) {
+		var split = option.split("-");
+		var toReturn = '';
+
+		split.forEach( function(element){
+			
+			toReturn = toReturn + ' ' + element.charAt(0).toUpperCase() + element.slice(1);;
+		});
+		return toReturn;
 	}
 });
