@@ -16,9 +16,17 @@
 
 <body>
 
+<div class="start-screen">
+	<div class=start-logo>
+		<div class="start-name">Papa Roller's</div>
+		<div class="start-title">Fine dining</div>
+	</div>
+	<div class="start-message">Tap anywhere to start</div>
+</div>
+
 <div class="container btn-container">
 	<div class="btn" id="help">?</div>
-	<div class="btn disabled" id="order">Your order</div>
+	<div class="btn disabled" id="order">Your order <span class="qty"></span></div>
 </div>
 
 
@@ -39,8 +47,9 @@
 		</div>
 
 		<div class="overview">
-		
+			<!-- List of orders placed -->
 		</div>
+		
 		<div class="total">
 			<h2></h2>
 		</div>
@@ -63,6 +72,7 @@
 			<div class="item"><a href="#drink">Drinks</a></div>
 			<div class="item"><a href="#entree">Entrees</a></div>
 			<div class="item"><a href="#dessert">Desserts</a></div>
+			<div class="item"><a href="#popular">Popular</a></div>
 		</div>
 		<div class="menu-area">
 			<div id="start">
@@ -72,17 +82,32 @@
 </section>
 
 <footer>
-
 </footer>
 
 <!-- modal that will be filled by clicked menu item -->
 <div class="popup-modal">
 	<div id="item">
-		<div class="image">
-		</div>
-		<div class="text">
-			<h1 class="title">Title</h1>
-			<h2 class="cost">$19.99</h1>
+		<div class="image"></div>
+		<div class="content">
+			<div class="info">
+				<h1 class="title">Title</h1>
+				<h2 class="cost">$19.99</h2>
+				<div class="btn" id="add-item-to-order" data-id="">Add to order</div>
+			</div>
+			<div class="text">
+				<div class="row">
+					<div class="col-md-8 description">
+						Item description
+					</div>
+					<div class="col-md-8 customizations">
+						Item customization
+					</div>
+					<div class="col-md-3 nutrition">
+						Nutrition facts
+					</div>
+				</div>
+				<div class="btn" id="submit-order" data-id="">Submit</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -91,6 +116,7 @@
 <div id="help-screen">
 	<div id="overlay"></div>
 	<div id="content">
+		<a href="#">Change font settings</a>
 		<a href="#">I made a mistake with my order</a>
 		<a href="#">I need help with the interface</a>
 		<a href="#">Other</a>

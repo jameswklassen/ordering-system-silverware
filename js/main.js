@@ -55,6 +55,7 @@ $(document).ready(function()
 			$(modal + ' .row .customizations').html('');
 			customizations.forEach(function(option)
 			{
+
 				var newOption = parseOption(option);
 				$(modal + ' .row .customizations').append(
 					'<label class="button-container">' + newOption + 
@@ -66,7 +67,6 @@ $(document).ready(function()
 
 			});
 			$(modal + ' .row .customizations').hide();
-
 			// Hide the submit button
 			$(modal + ' #submit-order').attr('data-id', id);
 			$(modal + ' #submit-order').hide();
@@ -260,6 +260,7 @@ $(document).ready(function()
 		var customizationString = "";
 		selectedOptions.forEach(function(option)
 		{
+
 			var newOption = parseOption(option);
 			customizationString += newOption + ', ';
 		});
@@ -293,6 +294,7 @@ $(document).ready(function()
         // Hide the remove buttons
 		$('.remove-item-from-order').hide();
 		$('.edit-item-in-order').hide();
+    
 		orderTotal += itemToAdd['price']; // add the cost of the item to the total cost
 		$('.order-overview .total h2').html('$' + Math.floor(orderTotal * 100) / 100); // output the new total at the bottom of the order page (truncated to 2 decimals)
 
@@ -329,6 +331,7 @@ $(document).ready(function()
 		//Find the new order total and update it on the my order screen
 		orderTotal -= itemToRemove['price'];
 		$('.order-overview .total h2').html('$' + Math.floor(orderTotal * 100) / 100);
+
 
 		//Fix negative numbers
 		if(orderTotal < 0)
