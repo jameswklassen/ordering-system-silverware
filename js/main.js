@@ -314,6 +314,7 @@ $(document).ready(function()
 		{
 			$('#order').addClass('disabled');
 			$('.btn#order .qty').html('');
+			$(".order-overview").fadeOut();
 		}
 	}
 
@@ -365,6 +366,7 @@ $(document).ready(function()
 		{
 			$('#order').addClass('disabled');
 			$('.btn#order .qty').html('');
+			$(".order-overview").fadeOut();
 		}
 
         //Show the remove buttons now
