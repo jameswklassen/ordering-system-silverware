@@ -126,6 +126,16 @@ $(document).ready(function()
 		$("#help-screen").fadeOut();
 	});
 
+	//if one of the call server buttons is clicked, confirm they want to call
+	$("#content").click(function()
+	{                
+		if (confirm("Are you sure you want to call the server?")) {
+			$("#help-screen").fadeOut();
+		}else{
+		
+		} 
+	});
+
     // Show the customization options when a user decides to add that item
 	$('#add-item-to-order').click(function()
 	{
