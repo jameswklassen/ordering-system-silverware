@@ -41,8 +41,19 @@ body {
     float: left;
 }
 
+
 .btn#help:hover {
     background: rgb(197, 136, 22);
+}
+
+.btn.active#help {
+    background: #ddd !important;
+    color: #aaa !important;
+    border-radius: 40px;
+}
+
+.btn.active#help:hover {
+    background: #ddd !important;
 }
 
 .btn.disabled {
@@ -224,7 +235,6 @@ section.menu .menu-area .item:hover {
 section.menu .tabs .item {
     display: inline-block;
     width: 19%;
-    /*Had to change this from 20% to 19% to fit all tabs*/
     text-align: center;
     padding: 15px;
     margin: 0px;
@@ -283,7 +293,10 @@ section.menu .tabs .item:hover::after {
 }
 
 #submit-order {
-    float: right;
+    position: absolute;
+    bottom: 0; right: 30px;
+    padding: 10px 30px !important;
+    margin: 15px 10px;
 }
 
 .featherlight {
@@ -409,6 +422,24 @@ section.menu .tabs .item:hover::after {
     transform: rotate(45deg);
   }
 
+  .featherlight-content h3 {
+      font-size: 16px;
+      font-weight: 400;
+  }
+
+  .featherlight-content #item textarea {
+    font-size: 14px;
+      border: none;
+      background: #efefef;
+      padding: 15px;
+      border-radius: 10px;
+  }
+  .featherlight-content #item textarea:focus {
+      outline: none;
+      background: #ddd;
+      box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
+  }
+
 
 /* -------------------------------
 
@@ -417,7 +448,7 @@ section.menu .tabs .item:hover::after {
 ------------------------------- */
 
 #help-screen {
-    z-index: 11;
+    z-index: 14;
     position: fixed;
     top: 0;
     left: 0;

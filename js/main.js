@@ -52,12 +52,14 @@ $(document).ready(function()
 			var customizations = Object.keys(item['customizations']);
 
 			// Populate the customizations
-			$(modal + ' .row .customizations').html('');
+			$(modal + ' .row .customizations .checkboxes').html('');
+			$(modal + ' .row .customizations .text-field').html('');
+
 			customizations.forEach(function(option)
 			{
 
 				var newOption = parseOption(option);
-				$(modal + ' .row .customizations').append(
+				$(modal + ' .row .customizations .checkboxes').append(
 					'<label class="button-container">' + newOption + 
 						'<input type="checkbox" name="type" value="' + newOption + '">' + 
 						'<span class="checkmark"></span>' + 
@@ -66,6 +68,11 @@ $(document).ready(function()
 				);
 
 			});
+
+			$(modal + ' .row .customizations .text-field').append(
+				'<h3>Special requirements</h3>' + 
+				'<textarea></textarea>'
+			);
 			$(modal + ' .row .customizations').hide();
 			// Hide the submit button
 			$(modal + ' #submit-order').attr('data-id', id);
@@ -131,6 +138,8 @@ $(document).ready(function()
 	{                
 		if (confirm("Are you sure you want to call the server?")) {
 			$("#help-screen").fadeOut();
+			$('#help').html('<i class="fas fa-check"></i> server on the way');
+			$('#help').addClass('active');
 		}else{
 		
 		} 
@@ -139,11 +148,32 @@ $(document).ready(function()
     // Show the customization options when a user decides to add that item
 	$('#add-item-to-order').click(function()
 	{
+		var oldHeight = $('.featherlight-content').height();
 		$('.featherlight-content #item .row .nutrition').hide();
 		$('.featherlight-content #item .row .description').hide();
 		$('.featherlight-content #item .row .customizations').show();
 		$('.featherlight-content #item #add-item-to-order').hide();
+
 		$('.featherlight-content #item #submit-order').show();
+
+		$('.btn#submit-order').css('transform', 'scale(1.3)');
+		setTimeout(function()
+		{
+			$('.btn#submit-order').css('transform', 'scale(1.0)');
+		}, 150);
+
+		if(oldHeight > $('.featherlight-content').height()) {
+			$('.featherlight-content').height(oldHeight);
+		}
+	});
+
+	$('.customizations').on("click", "label", function () 
+	{
+		$('.btn#submit-order').css('transform', 'scale(1.3)');
+		setTimeout(function()
+		{
+			$('.btn#submit-order').css('transform', 'scale(1.0)');
+		}, 150);
 	});
 
     // Add the item to a user's order
