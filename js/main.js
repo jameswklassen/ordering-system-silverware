@@ -138,6 +138,19 @@ $(document).ready(function()
 		$("#help-screen").fadeOut();
 	});
 
+	//if the submit button is called go back to start screen
+	$("#submit-order-btn").click(function()
+	{
+		if (confirm("Are you sure you want to submit your order?")) {
+			$(".start-screen").fadeIn(700);
+			$('.order-overview').hide();
+			$('.order-overview').hide();
+			$('.btn#submit-order-btn').hide(); //hide the submit button to start
+			$('.btn#order').show();
+		}
+	}
+	);
+
 	//if one of the call server buttons is clicked, confirm they want to call
 	$("#content").click(function()
 	{                
@@ -145,9 +158,7 @@ $(document).ready(function()
 			$("#help-screen").fadeOut();
 			$('#help').html('<i class="fas fa-check"></i> server on the way');
 			$('#help').addClass('active');
-		}else{
-		
-		} 
+		}
 	});
 
     // Show the customization options when a user decides to add that item
