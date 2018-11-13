@@ -1,13 +1,17 @@
 //Global page variables
 var currOrder = new Array(); // holds the current order
-var pOrderList = new Array(); // holds the current order (unique attributes)
+var uniqueItemIDs = new Array(); // holds the current order (unique attributes)
+var orderCustomizations = new Array(); // holds the current order customizations
 var orderTotal = 0.0; // the total cost of the order
 var popThreshold = 8; // Minimum popularity rating for items to be in popular tab
 var editMode = false; // Current edit mode
+var sentToKitchen = false; // Was the order submitted?
 
 // Methods called when the page is ready
 $(document).ready(function()
 {
+	$(".start-background").show(); //show start screen
+	$(".menu .popup-modal").hide();	//hide the menu
 	$('.menu-area').height($(window).height() - 400); // resizes the menu area based on window height
 	$('.overview').height($(window).height() - 475);
 
@@ -43,6 +47,7 @@ $(document).ready(function()
 		{
 			$.featherlight($('.popup-modal #item'), {});
 			var modal = '.featherlight-content #item';
+			$('.featherlight-content #item').parent().parent().hide();
 			$(modal + ' h1').html(item['title']);
 			$(modal + ' h2.cost').html('$' + item['price']);
 			$(modal + ' .row .description').html(item['description']);
@@ -59,14 +64,12 @@ $(document).ready(function()
 
 			customizations.forEach(function(option)
 			{
-
 				var newOption = parseOption(option);
 				$(modal + ' .row .customizations .checkboxes').append(
 					'<label class="button-container">' + newOption + 
 						'<input type="checkbox" name="type" value="' + newOption + '">' + 
 						'<span class="checkmark"></span>' + 
 					'</label>'
-						//  '<br>'
 				);
 
 			});
@@ -79,6 +82,7 @@ $(document).ready(function()
 			// Hide the submit button
 			$(modal + ' #submit-order').attr('data-id', id);
 			$(modal + ' #submit-order').hide();
+			$('.featherlight-content #item').parent().parent().fadeIn(800);
 		}
 	});
 
@@ -93,7 +97,11 @@ $(document).ready(function()
     // Animation when start screen is triggered
 	$('.start-background').click(function()
 	{
-		$(".start-background").fadeOut(700);
+		if(!sentToKitchen)
+		{
+			$(".start-background").fadeOut(800);	// Hide start screen
+			$(".menu .popup-modal").fadeIn(800);	// show the menu
+		}
 	});
 
 	// Order button
@@ -113,6 +121,13 @@ $(document).ready(function()
 		{
 			$(".order-overview").fadeIn();
 			$('.btn#order').hide();
+			if(currOrder.length == 0)
+			{
+				$('.btn#submit-order-btn').addClass('disabled');
+			} else
+			{
+				$('.btn#submit-order-btn').removeClass('disabled');
+			}
 			$('.btn#submit-order-btn').show();
 		}
 	});
@@ -142,19 +157,32 @@ $(document).ready(function()
 	//if the submit button is called go back to start screen
 	$("#submit-order-btn").click(function()
 	{
-		if (confirm("Are you sure you want to submit your order?")) {
-			
+		if (currOrder.length !== 0 && confirm("Are you sure you want to submit your order?"))
+		{
+			sentToKitchen = true;
 			$(".start-screen").hide();	//hide the logo
 			$(".start-background").fadeIn(800); //show the background
-			$(".submit-confirm-message").show(); //show the message
-			$('.order-overview').hide();  //hide the order overview
-			$('.btn#submit-order-btn').hide(); //hide the submit button to start
-			$('.btn#order').show(); //show the your order button
+			$(".submit-confirm-message").fadeIn(800); //show the message
+			$('.order-overview').fadeOut(800);  //hide the order overview
+			$('.btn#submit-order-btn').fadeOut(800); //hide the submit button to start
+			$('.btn#order').fadeIn(800); //show the your order button
+			
+			//Clear the order
+			currOrder = new Array();
+			uniqueItemIDs = new Array();
+			orderCustomizations = new Array();
+			orderTotal = 0;
+			$('.order-overview .overview').empty();
+			$('#order').addClass('disabled');
+			$('.btn#order .qty').html('');
+			$(".order-overview").fadeOut();
 
 			//after some time, go back to the start screen
-			setTimeout(function(){
+			setTimeout(function()
+			{
 				$(".start-screen").fadeIn(500);
 				$(".submit-confirm-message").hide();
+				sentToKitchen = false;
 			}, 5000);
 		}
 	}
@@ -310,33 +338,26 @@ $(document).ready(function()
 			return element['id'] == id;
 		});
 
-		// NOTE: This only adds the customized options to the 
-		//       html, NOT THE ARRAY - so if we need the 
-		//       customizations later... we can figure that
-        //       out when we get there (ie. GG).
-        // HONESTLY, WHO WROTE THIS CODE?
+		// Get the selected customizations
 		var selectedOptions = [];
 		$("input:checkbox[name=type]:checked").each(function()
 		{
 			selectedOptions.push($(this).val());
 		});
+		orderCustomizations.push(selectedOptions);	// Add the customizations to the array
 
 		// Create the string to append to the item summary
 		var customizationString = "";
 		selectedOptions.forEach(function(option)
 		{
-
 			var newOption = parseOption(option);
 			customizationString += newOption + ', ';
 		});
-		console.log(customizationString);
 		customizationString = customizationString.slice(0, -2);
-		console.log(customizationString);
-
 
 		currOrder.push(itemToAdd); // add the item to the customers order
 		var uniqueID = getID(); // Generate a unique ID for this item
-		pOrderList.push(uniqueID);  // Store that in paralell with the original arary
+		uniqueItemIDs.push(uniqueID);  // Store that in paralell with the original arary
 
 		// adds the formatted item to the "your order" screen
 		$('.order-overview .overview').append(
@@ -363,7 +384,6 @@ $(document).ready(function()
 		orderTotal += itemToAdd['price']; // add the cost of the item to the total cost
 		$('.order-overview .total h2').html('$' + Math.floor(orderTotal * 100) / 100); // output the new total at the bottom of the order page (truncated to 2 decimals)
 
-        
         //Update the order button based on the order length
 		if(currOrder.length > 0)
 		{
@@ -387,17 +407,15 @@ $(document).ready(function()
 	function removeFromOrder(uniqueVal)
 	{
 		//Remove the item from both arrays
-		var itemIndex = pOrderList.indexOf(uniqueVal);
+		var itemIndex = uniqueItemIDs.indexOf(uniqueVal);
 		var itemToRemove = currOrder[itemIndex];
 		currOrder.splice(itemIndex, 1);
-		pOrderList.splice(itemIndex, 1);
-
-		console.log(itemToRemove['price']);
+		uniqueItemIDs.splice(itemIndex, 1);
+		orderCustomizations.splice(itemIndex, 1);
 
 		//Find the new order total and update it on the my order screen
 		orderTotal -= itemToRemove['price'];
 		$('.order-overview .total h2').html('$' + Math.floor(orderTotal * 100) / 100);
-
 
 		//Fix negative numbers
 		if(orderTotal < 0)
@@ -456,7 +474,6 @@ $(document).ready(function()
 			$('#edit-order').html("edit <i class=\"fas fa-edit\"></i>")
 			$('.order-overview .overview .remove-item-from-order').fadeOut();
 			$('.order-overview .overview .edit-item-in-order').fadeOut();
-
 			editMode = false;
 		}
 	}
@@ -473,6 +490,7 @@ $(document).ready(function()
 		return text;
 	}
 
+	//Parses the given customization option
 	function parseOption(option) {
 		var split = option.split("-");
 		var toReturn = '';
