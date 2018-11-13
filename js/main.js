@@ -21,6 +21,7 @@ $(document).ready(function()
 	init(); // initialize 
 	drawMenu('starter'); // set the initial category to "starters"
 	$('.btn#submit-order-btn').hide(); //hide the submit button to start
+	$(".submit-confirm-message").hide();
 
 	// ---------------------------------
 	//      button pressing code
@@ -90,9 +91,9 @@ $(document).ready(function()
 	});
 
     // Animation when start screen is triggered
-	$('.start-screen').click(function()
+	$('.start-background').click(function()
 	{
-		$(".start-screen").fadeOut(700);
+		$(".start-background").fadeOut(700);
 	});
 
 	// Order button
@@ -142,11 +143,19 @@ $(document).ready(function()
 	$("#submit-order-btn").click(function()
 	{
 		if (confirm("Are you sure you want to submit your order?")) {
-			$(".start-screen").fadeIn(700);
-			$('.order-overview').hide();
-			$('.order-overview').hide();
+			
+			$(".start-screen").hide();	//hide the logo
+			$(".start-background").fadeIn(800); //show the background
+			$(".submit-confirm-message").show(); //show the message
+			$('.order-overview').hide();  //hide the order overview
 			$('.btn#submit-order-btn').hide(); //hide the submit button to start
-			$('.btn#order').show();
+			$('.btn#order').show(); //show the your order button
+
+			//after some time, go back to the start screen
+			setTimeout(function(){
+				$(".start-screen").fadeIn(500);
+				$(".submit-confirm-message").hide();
+			}, 5000);
 		}
 	}
 	);

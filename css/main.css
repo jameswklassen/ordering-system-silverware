@@ -103,7 +103,7 @@ header h2 {
 
 ------------------------------- */
 
-.start-screen {
+.start-background {
     z-index: 16;
     position: fixed;
     background-image: url('../img/bg.jpg');
