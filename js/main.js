@@ -432,6 +432,8 @@ $(document).ready(function()
 			$('#order').addClass('disabled');
 			$('.btn#order .qty').html('');
 			$(".order-overview").fadeOut();
+			$(".btn#submit-order-btn").hide();
+			$('#order').show();
 			
 		}
 
