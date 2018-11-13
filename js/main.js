@@ -5,13 +5,15 @@ var orderCustomizations = new Array(); // holds the current order customizations
 var orderTotal = 0.0; // the total cost of the order
 var popThreshold = 8; // Minimum popularity rating for items to be in popular tab
 var editMode = false; // Current edit mode
-var sentToKitchen = false; // Was the order submitted?
+var sentToKitchen = true; // Was the order submitted?
 
 // Methods called when the page is ready
 $(document).ready(function()
 {
-	$(".start-background").show(); //show start screen
 	$(".menu .popup-modal").hide();	//hide the menu
+	$("body").fadeIn(2000);	//Fade in the page slowly
+	$(".start-background").fadeIn(2000); //show start screen
+	sentToKitchen = false;
 	$('.menu-area').height($(window).height() - 400); // resizes the menu area based on window height
 	$('.overview').height($(window).height() - 475);
 
@@ -32,59 +34,7 @@ $(document).ready(function()
 	// ---------------------------------
 
 	// When a menu item in the menu is clicked
-	$('.menu-area .item').on("click", function()
-	{
-		var id = $(this).attr('id');
-		let item = menuItems.find(function(obj)
-		{
-			return obj.id == id;
-		});
-
-		// If the item we clicked on is found in our data, then
-		// we can open the modal and populate it with the data 
-		// associated with that items id.
-		if(typeof item != "undefined")
-		{
-			$.featherlight($('.popup-modal #item'), {});
-			var modal = '.featherlight-content #item';
-			$('.featherlight-content #item').parent().parent().hide();
-			$(modal + ' h1').html(item['title']);
-			$(modal + ' h2.cost').html('$' + item['price']);
-			$(modal + ' .row .description').html(item['description']);
-			$(modal + ' .row .nutrition').html('Item Calories: ' + item['calories']);
-			$(modal + ' .image').css('background-image', 'url("img/' + item['photoName'] + '.jpg")');
-			// $(modal + ' #add-item-to-order').attr('data-id', item['id']);
-
-			// Create the customization options
-			var customizations = Object.keys(item['customizations']);
-
-			// Populate the customizations
-			$(modal + ' .row .customizations .checkboxes').html('');
-			$(modal + ' .row .customizations .text-field').html('');
-
-			customizations.forEach(function(option)
-			{
-				var newOption = parseOption(option);
-				$(modal + ' .row .customizations .checkboxes').append(
-					'<label class="button-container">' + newOption + 
-						'<input type="checkbox" name="type" value="' + newOption + '">' + 
-						'<span class="checkmark"></span>' + 
-					'</label>'
-				);
-
-			});
-
-			$(modal + ' .row .customizations .text-field').append(
-				'<h3>Special requirements</h3>' + 
-				'<textarea></textarea>'
-			);
-			$(modal + ' .row .customizations').hide();
-			// Hide the submit button
-			$(modal + ' #submit-order').attr('data-id', id);
-			$(modal + ' #submit-order').hide();
-			$('.featherlight-content #item').parent().parent().fadeIn(800);
-		}
-	});
+	$('.menu-area .item').on("click", showModal);
 
     // Switching menu tabs
 	$('.menu .tabs .item').click(function()
@@ -232,7 +182,6 @@ $(document).ready(function()
     // Add the item to a user's order
 	$('#submit-order').click(function()
 	{
-		// console.log($(this).attr('data-id'));
 		addToOrder($(this).attr('data-id'));
 		$.featherlight.close();
 	});
@@ -244,7 +193,18 @@ $(document).ready(function()
         {
             toggleEditMode();
         }
-		// console.log($(this).attr('data-id'));
+	});
+
+	$('.order-overview').on("click", ".edit-item-in-order", function()
+	{
+		/*console.log("hi");
+		editMode = true;
+		toggleEditMode();
+		$(".order-overview").fadeOut();
+		$('.btn#order').show();
+		$('.btn#submit-order-btn').hide();
+		console.log($(this));*/
+	   showEditModal($(this).attr('id'));
 	});
 
 	// Removes an item from an order when the "remove item" button is clicked
@@ -331,7 +291,6 @@ $(document).ready(function()
 	// Given an ID, adds specific menu item to the customer's order
 	function addToOrder(id)
 	{
-
 		// First get the menu item object from the list
 		var itemToAdd = menuItems.find(function(element)
 		{
@@ -366,8 +325,8 @@ $(document).ready(function()
 			        '<div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + '.jpg);"></div>' +
 			        '<div class="col-sm-8 details">' +
 			            '<h2>' + itemToAdd['title'] + '</h2> ' +
-						'<div class="btn edit-item-in-order" data-id="' + itemToAdd['id'] + '">edit <i class="fas fa-edit"></i></div>' +
-						'<div class="btn remove-item-from-order" data-id="' + itemToAdd['id'] + '">Remove Item <i class="fas fa-trash"></i></div><br>' +
+						'<div class="btn edit-item-in-order" id="' + id + '">edit <i class="fas fa-edit" id="' + id + '"></i></div>' +
+						'<div class="btn remove-item-from-order" id="' + id + '">Remove Item <i class="fas fa-trash"></i></div><br>' +
 						customizationString +
                     '</div>' +
 			        '<div class="col-sm-1 cost">' +
@@ -500,5 +459,115 @@ $(document).ready(function()
 			toReturn = toReturn + ' ' + element.charAt(0).toUpperCase() + element.slice(1);;
 		});
 		return toReturn;
+	}
+
+	function showModal()
+	{
+		var id = $(this).attr('id');
+		let item = menuItems.find(function(obj)
+		{
+			return obj.id == id;
+		});
+
+		// If the item we clicked on is found in our data, then
+		// we can open the modal and populate it with the data 
+		// associated with that items id.
+		if(typeof item != "undefined")
+		{
+			$.featherlight($('.popup-modal #item'), {});
+			var modal = '.featherlight-content #item';
+			$('.featherlight-content #item').parent().parent().hide();
+			$(modal + ' h1').html(item['title']);
+			$(modal + ' h2.cost').html('$' + item['price']);
+			$(modal + ' .row .description').html(item['description']);
+			$(modal + ' .row .nutrition').html('Item Calories: ' + item['calories']);
+			$(modal + ' .image').css('background-image', 'url("img/' + item['photoName'] + '.jpg")');
+			// $(modal + ' #add-item-to-order').attr('data-id', item['id']);
+
+			// Create the customization options
+			var customizations = Object.keys(item['customizations']);
+
+			// Populate the customizations
+			$(modal + ' .row .customizations .checkboxes').html('');
+			$(modal + ' .row .customizations .text-field').html('');
+
+			customizations.forEach(function(option)
+			{
+				var newOption = parseOption(option);
+				$(modal + ' .row .customizations .checkboxes').append(
+					'<label class="button-container">' + newOption + 
+						'<input type="checkbox" name="type" value="' + newOption + '">' + 
+						'<span class="checkmark"></span>' + 
+					'</label>'
+				);
+
+			});
+
+			$(modal + ' .row .customizations .text-field').append(
+				'<h3>Special requirements</h3>' + 
+				'<textarea></textarea>'
+			);
+			$(modal + ' .row .customizations').hide();
+			
+			// Hide the submit button
+			$(modal + ' #submit-order').attr('data-id', id);
+			$(modal + ' #submit-order').hide();
+			$('.featherlight-content #item').parent().parent().fadeIn(800);
+		}
+	}
+	function showEditModal(id)
+	{
+		let item = menuItems.find(function(obj)
+		{
+			return obj.id == id;
+		});
+
+		// If the item we clicked on is found in our data, then
+		// we can open the modal and populate it with the data 
+		// associated with that items id.
+		if(typeof item != "undefined")
+		{
+			$.featherlight($('.popup-modal #item'), {});
+			var modal = '.featherlight-content #item';
+			$('.featherlight-content #item').parent().parent().hide();
+			$(modal + ' h1').html(item['title']);
+			$(modal + ' h2.cost').html('$' + item['price']);
+			$(modal + ' .image').css('background-image', 'url("img/' + item['photoName'] + '.jpg")');
+			$('.featherlight-content #item .row .nutrition').hide();
+			$('.featherlight-content #item .row .description').hide();
+			$('.featherlight-content #item #add-item-to-order').hide();
+			$('.featherlight-content #item #submit-order').show();
+
+			// Create the customization options
+			var customizations = Object.keys(item['customizations']);
+
+			// Populate the customizations
+			$(modal + ' .row .customizations .checkboxes').html('');
+			$(modal + ' .row .customizations .text-field').html('');
+
+			customizations.forEach(function(option)
+			{
+				var newOption = parseOption(option);
+				$(modal + ' .row .customizations .checkboxes').append(
+					'<label class="button-container">' + newOption + 
+						'<input type="checkbox" name="type" value="' + newOption + '">' + 
+						'<span class="checkmark"></span>' + 
+					'</label>'
+				);
+
+			});
+
+			$(modal + ' .row .customizations .text-field').append(
+				'<h3>Special requirements</h3>' + 
+				'<textarea></textarea>'
+			);
+			$(modal + ' .row .customizations').show();
+			
+			// Show the submit button
+			$(modal + ' #submit-order').attr('data-id', id);
+			$(modal + ' #submit-order').show();
+			$('.featherlight-content #item').parent().parent().fadeIn(800);
+			$('.featherlight-content #item').parent().parent().css('z-index', 3000);
+		}
 	}
 });
