@@ -567,7 +567,7 @@ $(document).ready(function()
 			$(modal + ' #submit-order').attr('data-id', id);
 			$(modal + ' #submit-order').show();
 			$('.featherlight-content #item').parent().parent().fadeIn(800);
-			$('.featherlight-content #item').parent().parent().css('z-index', '3000 !important');
+			$('.featherlight-content #item').parent().parent().attr('style', 'z-index: 3000 !important');
 		}
 	}
 });
