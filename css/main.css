@@ -61,13 +61,13 @@ body {
     color: #aaa !important;
 }
 
-.btn#order {
+.btn#order, .btn#submit-order-btn {
     padding: 15px 30px;
     background: rgb(86, 165, 13);
     float: right;
 }
 
-.btn#order:hover {
+.btn#order:hover, .btn#submit-order-btn:hover {
     background: rgb(70, 124, 19)
 }
 

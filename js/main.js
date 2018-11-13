@@ -20,6 +20,7 @@ $(document).ready(function()
 
 	init(); // initialize 
 	drawMenu('starter'); // set the initial category to "starters"
+	$('.btn#submit-order-btn').hide(); //hide the submit button to start
 
 	// ---------------------------------
 	//      button pressing code
@@ -104,10 +105,14 @@ $(document).ready(function()
 			editMode = true;
 			toggleEditMode();
 			$(".order-overview").fadeOut();
+			$('.btn#order').show();
+			$('.btn#submit-order-btn').hide();
 		}
 		else
 		{
 			$(".order-overview").fadeIn();
+			$('.btn#order').hide();
+			$('.btn#submit-order-btn').show();
 		}
 	});
 
@@ -407,6 +412,7 @@ $(document).ready(function()
 			$('#order').addClass('disabled');
 			$('.btn#order .qty').html('');
 			$(".order-overview").fadeOut();
+			
 		}
 
         //Show the remove buttons now
