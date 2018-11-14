@@ -337,7 +337,9 @@ $(document).ready(function() {
 		}
 
 		//Remove the item from the overview screen
-		$('.order-overview .overview .item[data-id="' + uniqueID + '"]').remove();
+		$('.order-overview .overview .item[data-id="' + uniqueID + '"]').hide(function() {
+			$(this).remove()
+		});
 
 		//Update the totals and other information
 		//Update the order button based on the order length
@@ -472,9 +474,7 @@ $(document).ready(function() {
 				closeOnEsc: false,
 				afterClose: function(event) {
 					//Remove the item from the overview screen
-					$('.order-overview .overview .item[data-id="' + uniqueID + '"]').hide(function() {
-						$(this).remove()
-					});
+					$('.order-overview .overview .item[data-id="' + uniqueID + '"]').remove();
 					//Show the edit buttons now
 					$('.order-overview .overview .edit-item-in-order').show();
 					$('.order-overview .overview .remove-item-from-order').show();
