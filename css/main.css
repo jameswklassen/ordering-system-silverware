@@ -31,6 +31,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     background-image: url('../img/bg.jpg');
     background-size: 100%;
+    display: none;
 }
 
 .btn {
