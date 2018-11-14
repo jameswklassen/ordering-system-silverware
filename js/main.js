@@ -2,6 +2,7 @@
 var currOrder = new Array(); // holds the current order
 var uniqueItemIDs = new Array(); // holds the current order (unique attributes)
 var orderCustomizations = new Array(); // holds the current order customizations
+var specialRequirements = new Array(); // holds the current order customizations
 var orderTotal = 0.0; // the total cost of the order
 var popThreshold = 8; // Minimum popularity rating for items to be in popular tab
 var editMode = false; // Current edit mode
@@ -197,14 +198,7 @@ $(document).ready(function()
 
 	$('.order-overview').on("click", ".edit-item-in-order", function()
 	{
-		/*console.log("hi");
-		editMode = true;
-		toggleEditMode();
-		$(".order-overview").fadeOut();
-		$('.btn#order').show();
-		$('.btn#submit-order-btn').hide();
-		console.log($(this));*/
-	   showEditModal($(this).attr('id'));
+	   showEditModal($(this).attr('id'), $(this).parent().parent().parent().attr('data-id'));
 	});
 
 	// Removes an item from an order when the "remove item" button is clicked
@@ -318,6 +312,8 @@ $(document).ready(function()
 		var uniqueID = getID(); // Generate a unique ID for this item
 		uniqueItemIDs.push(uniqueID);  // Store that in paralell with the original arary
 
+		specialRequirements.push($('.row .customizations .text-field #requirements').val());
+
 		// adds the formatted item to the "your order" screen
 		$('.order-overview .overview').append(
 			'<div class="item" data-id="' + uniqueID + '">' +
@@ -363,14 +359,15 @@ $(document).ready(function()
 	}
 
     //Remove an item from an order given that item's unique ID.
-	function removeFromOrder(uniqueVal)
+	function removeFromOrder(uniqueID)
 	{
-		//Remove the item from both arrays
-		var itemIndex = uniqueItemIDs.indexOf(uniqueVal);
+		//Remove the item from the arrays
+		var itemIndex = uniqueItemIDs.indexOf(uniqueID);
 		var itemToRemove = currOrder[itemIndex];
 		currOrder.splice(itemIndex, 1);
 		uniqueItemIDs.splice(itemIndex, 1);
 		orderCustomizations.splice(itemIndex, 1);
+		specialRequirements.splice(itemIndex, 1);
 
 		//Find the new order total and update it on the my order screen
 		orderTotal -= itemToRemove['price'];
@@ -390,7 +387,7 @@ $(document).ready(function()
 		}
 
 		//Remove the item from the overview screen
-		$('.order-overview .overview .item[data-id="' + uniqueVal + '"]').remove();
+		$('.order-overview .overview .item[data-id="' + uniqueID + '"]').remove();
 
 		//Update the totals and other information
 		//Update the order button based on the order length
@@ -505,7 +502,7 @@ $(document).ready(function()
 
 			$(modal + ' .row .customizations .text-field').append(
 				'<h3>Special requirements</h3>' + 
-				'<textarea></textarea>'
+				'<textarea id="requirements"></textarea>'
 			);
 			$(modal + ' .row .customizations').hide();
 			
@@ -515,12 +512,16 @@ $(document).ready(function()
 			$('.featherlight-content #item').parent().parent().fadeIn(800);
 		}
 	}
-	function showEditModal(id)
+	function showEditModal(id, uniqueID)
 	{
+		// Remove the old item and add back the edited version.
+		var itemIndex = uniqueItemIDs.indexOf(uniqueID);
+		var itemToRemove = currOrder[itemIndex];
+		var specialRequirement = specialRequirements[itemIndex];
 		let item = menuItems.find(function(obj)
 		{
 			return obj.id == id;
-		});
+		});		
 
 		// If the item we clicked on is found in our data, then
 		// we can open the modal and populate it with the data 
@@ -548,6 +549,7 @@ $(document).ready(function()
 			customizations.forEach(function(option)
 			{
 				var newOption = parseOption(option);
+				var checkedOff = orderCustomizations[itemIndex].includes(newOption);
 				$(modal + ' .row .customizations .checkboxes').append(
 					'<label class="button-container">' + newOption + 
 						'<input type="checkbox" name="type" value="' + newOption + '">' + 
@@ -555,11 +557,16 @@ $(document).ready(function()
 					'</label>'
 				);
 
+				if(checkedOff)
+				{
+					$(modal + ' .row .customizations .checkboxes .button-container input[value=\'' + newOption + '\']').prop("checked", true);
+				}
+
 			});
 
 			$(modal + ' .row .customizations .text-field').append(
 				'<h3>Special requirements</h3>' + 
-				'<textarea></textarea>'
+				'<textarea id="requirements">' + specialRequirement + '</textarea>'
 			);
 			$(modal + ' .row .customizations').show();
 			
@@ -568,6 +575,18 @@ $(document).ready(function()
 			$(modal + ' #submit-order').show();
 			$('.featherlight-content #item').parent().parent().fadeIn(800);
 			$('.featherlight-content #item').parent().parent().attr('style', 'z-index: 3000 !important');
+
+			//Remove the item from the arrays
+			currOrder.splice(itemIndex, 1);
+			uniqueItemIDs.splice(itemIndex, 1);
+			orderCustomizations.splice(itemIndex, 1);
+			specialRequirements.splice(itemIndex, 1);
+			orderTotal -= itemToRemove['price'];
+
+			//Remove the item from the overview screen
+			$('.order-overview .overview .item[data-id="' + uniqueID + '"]').fadeOut(2500, function() {
+				$(this).remove()
+			});
 		}
 	}
 });
