@@ -108,6 +108,12 @@
     /* margin-right: 15px; */
 }
 
+.order-overview .overview .item .order-buttons {
+    display: inline-block;
+    text-align: right;
+    float: right;
+}
+
 .order-overview .overview .item .cost {
     text-align: right;
 }
