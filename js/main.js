@@ -8,7 +8,7 @@ var popThreshold = 8; // Minimum popularity rating for items to be in popular ta
 var editMode = false; // Current edit mode
 var sentToKitchen = false; // Was the order submitted?
 
-var wasModalEdited = false;
+var wasModalEdited = false;	// flag used every time a modal is opened, determines if the users submitted their changes, or canceled
 
 // Methods called when the page is ready
 $(document).ready(function() {
