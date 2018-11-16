@@ -8,6 +8,8 @@ var popThreshold = 8; // Minimum popularity rating for items to be in popular ta
 var editMode = false; // Current edit mode
 var sentToKitchen = false; // Was the order submitted?
 
+var wasModalEdited = false;	// flag used every time a modal is opened, determines if the users submitted their changes, or canceled
+
 // Methods called when the page is ready
 $(document).ready(function() {
 	$(".menu .popup-modal").hide(); //hide the menu
@@ -156,6 +158,7 @@ $(document).ready(function() {
 
 	// Add the item to a user's order
 	$('#submit-order').click(function() {
+		wasModalEdited = true;	// since the user clicked submit, the modal was edited and changes must be saved
 		addToOrder($(this).attr('data-id'));
 		$.featherlight.close();
 	});
@@ -278,9 +281,11 @@ $(document).ready(function() {
 					'<div class="col-sm-3 image" style="background-image: url(img/thumbs/' + itemToAdd['photoName'] + '.jpg);"></div>' +
 					'<div class="col-sm-8 details">' +
 						'<h2>' + itemToAdd['title'] + '</h2> ' +
-						'<div class="btn edit-item-in-order" id="' + id + '">edit <i class="fas fa-edit" id="' + id + '"></i></div>' +
-						'<div class="btn remove-item-from-order" id="' + id + '">Remove Item <i class="fas fa-trash"></i></div><br>' +
-						customizationString +
+						'<div class="order-buttons">' + 
+							'<div class="btn edit-item-in-order" id="' + id + '">edit <i class="fas fa-edit" id="' + id + '"></i></div>' +
+							'<div class="btn remove-item-from-order" id="' + id + '">Remove Item <i class="fas fa-trash"></i></div><br>' +
+						'</div>' + 
+						'<p>' + customizationString + '</p>' +
 					'</div>' +
 					'<div class="col-sm-1 cost">' +
 						'<h3>$' + itemToAdd['price'] + '</h3>' +
@@ -455,6 +460,9 @@ $(document).ready(function() {
 
 	// Shows the item modal, in edit mode.
 	function showEditModal(id, uniqueID) {
+
+		wasModalEdited = false;
+    
 		// Remove the old item and add back the edited version.
 		var itemIndex = uniqueItemIDs.indexOf(uniqueID);
 		var itemToRemove = currOrder[itemIndex];
@@ -469,12 +477,23 @@ $(document).ready(function() {
 		// we can open the modal and populate it with the data 
 		// associated with that items id.
 		if(typeof item != "undefined") {
+
 			$.featherlight($('.popup-modal #item'), {
-				closeOnClick: false,
-				closeOnEsc: false,
+				// closeOnClick: false,
+				// closeOnEsc: false,
 				afterClose: function(event) {
 					//Remove the item from the overview screen
-					$('.order-overview .overview .item[data-id="' + uniqueID + '"]').remove();
+					if(wasModalEdited){
+						//Remove the item from the arrays if the modal was edited and the "submit" button was clicked
+						$('.order-overview .overview .item[data-id="' + uniqueID + '"]').remove();
+						orderTotal -= itemToRemove['price'];
+						$('.order-overview .total h2').html('$' + Math.floor(orderTotal * 100) / 100);
+						currOrder.splice(itemIndex, 1);
+						uniqueItemIDs.splice(itemIndex, 1);
+						orderCustomizations.splice(itemIndex, 1);
+						specialRequirements.splice(itemIndex, 1);
+					}
+
 					//Show the edit buttons now
 					$('.order-overview .overview .edit-item-in-order').show();
 					$('.order-overview .overview .remove-item-from-order').show();
@@ -482,7 +501,7 @@ $(document).ready(function() {
 			});
 			var modal = '.featherlight-content #item';
 			$('.featherlight-content #item').parent().parent().hide();
-			$('.featherlight-close-icon').hide();
+			// $('.featherlight-close-icon').hide();
 			$(modal + ' h1').html(item['title']);
 			$(modal + ' h2.cost').html('$' + item['price']);
 			$(modal + ' .image').css('background-image', 'url("img/' + item['photoName'] + '.jpg")');
@@ -528,13 +547,8 @@ $(document).ready(function() {
 			$(modal + ' #submit-order').show();
 			$('.featherlight-content #item').parent().parent().fadeIn(800);
 			$('.featherlight-content #item').parent().parent().attr('style', 'z-index: 3000 !important');
-
-			//Remove the item from the arrays
-			currOrder.splice(itemIndex, 1);
-			uniqueItemIDs.splice(itemIndex, 1);
-			orderCustomizations.splice(itemIndex, 1);
-			specialRequirements.splice(itemIndex, 1);
-			orderTotal -= itemToRemove['price'];
+			
 		}
 	}
+
 });
