@@ -460,7 +460,9 @@ $(document).ready(function() {
 
 	// Shows the item modal, in edit mode.
 	function showEditModal(id, uniqueID) {
+
 		wasModalEdited = false;
+    
 		// Remove the old item and add back the edited version.
 		var itemIndex = uniqueItemIDs.indexOf(uniqueID);
 		var itemToRemove = currOrder[itemIndex];
@@ -491,6 +493,7 @@ $(document).ready(function() {
 						orderCustomizations.splice(itemIndex, 1);
 						specialRequirements.splice(itemIndex, 1);
 					}
+
 					//Show the edit buttons now
 					$('.order-overview .overview .edit-item-in-order').show();
 					$('.order-overview .overview .remove-item-from-order').show();
