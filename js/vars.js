@@ -210,5 +210,57 @@ const menuItems = [{
     'calories': 297,
     'popularity': 8,
     'customizations': {}    
+},
+{
+    'id': 17,
+    'title': 'Ice Tea',
+    'photoName': 'ice_tea',
+    'price': 8.99,
+    'category': 'drink',
+    'description': 'Description',
+    'calories': 400,
+    'popularity': 4,
+    'customizations': {
+        'straw' : false,
+        'ice' : false
+    }    
+},
+{
+    'id': 18,
+    'title': 'Strawberry Kiwi Smoothy',
+    'photoName': 'smoothy',
+    'price': 9.99,
+    'category': 'drink',
+    'description': 'Description',
+    'calories': 500,
+    'popularity': 9,
+    'customizations': {
+        'lemon' : false
+    }    
+},
+{
+    'id': 19,
+    'title': 'French Vanilla Coffee',
+    'photoName': 'french-vanilla',
+    'price': 5.99,
+    'category': 'drink',
+    'description': 'Description',
+    'calories': 100,
+    'popularity': 9,
+    'customizations': {
+        'extra-vanilla' : false,
+        'iced' : false
+    }    
+},
+{
+    'id': 20,
+    'title': 'Wine',
+    'photoName': 'wine',
+    'price': 13.99,
+    'category': 'drink',
+    'description': 'Description',
+    'calories': 100,
+    'popularity': 8,
+    'customizations': {}    
 }
 ];
