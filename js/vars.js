@@ -166,5 +166,101 @@ const menuItems = [{
     'calories': 90,
     'popularity': 10,
     'customizations': {}
+},
+{
+    'id': 13,
+    'title': 'Tulsi Green Tea',
+    'photoName': 'tea',
+    'price': 3.99,
+    'category': 'drink',
+    'description': 'Description',
+    'calories': 5,
+    'popularity': 2,
+    'customizations': {}
+},
+{
+    'id': 14,
+    'title': 'Avocado Bread',
+    'photoName': 'avocado-bread',
+    'price': 8.99,
+    'category': 'starter',
+    'description': 'Description',
+    'calories': 380,
+    'popularity': 6,
+    'customizations': {}  
+},
+{
+    'id': 15,
+    'title': 'Salmon Cheese Canapes',
+    'photoName': 'canapes-cheese',
+    'price': 9.99,
+    'category': 'starter',
+    'description': 'Description',
+    'calories': 80,
+    'popularity': 4,
+    'customizations': {}    
+},
+{
+    'id': 16,
+    'title': 'Buckwheat Pesto Salad',
+    'photoName': 'buckwheat-salad',
+    'price': 8.99,
+    'category': 'starter',
+    'description': 'Description',
+    'calories': 297,
+    'popularity': 8,
+    'customizations': {}    
+},
+{
+    'id': 17,
+    'title': 'Ice Tea',
+    'photoName': 'ice_tea',
+    'price': 8.99,
+    'category': 'drink',
+    'description': 'Description',
+    'calories': 400,
+    'popularity': 4,
+    'customizations': {
+        'straw' : false,
+        'ice' : false
+    }    
+},
+{
+    'id': 18,
+    'title': 'Strawberry Kiwi Smoothy',
+    'photoName': 'smoothy',
+    'price': 9.99,
+    'category': 'drink',
+    'description': 'Description',
+    'calories': 500,
+    'popularity': 9,
+    'customizations': {
+        'lemon' : false
+    }    
+},
+{
+    'id': 19,
+    'title': 'French Vanilla Coffee',
+    'photoName': 'french-vanilla',
+    'price': 5.99,
+    'category': 'drink',
+    'description': 'Description',
+    'calories': 100,
+    'popularity': 9,
+    'customizations': {
+        'extra-vanilla' : false,
+        'iced' : false
+    }    
+},
+{
+    'id': 20,
+    'title': 'Wine',
+    'photoName': 'wine',
+    'price': 13.99,
+    'category': 'drink',
+    'description': 'Description',
+    'calories': 100,
+    'popularity': 8,
+    'customizations': {}    
 }
 ];
