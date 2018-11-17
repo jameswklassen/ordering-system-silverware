@@ -7,7 +7,6 @@ var orderTotal = 0.0; // the total cost of the order
 var popThreshold = 8; // Minimum popularity rating for items to be in popular tab
 var editMode = false; // Current edit mode
 var sentToKitchen = false; // Was the order submitted?
-
 var wasModalEdited = false;	// flag used every time a modal is opened, determines if the users submitted their changes, or canceled
 
 // Methods called when the page is ready
@@ -172,13 +171,13 @@ $(document).ready(function() {
 
 	// Shows the edit modal
 	$('.order-overview').on("click", ".edit-item-in-order", function() {
-		showEditModal($(this).attr('id'), $(this).parent().parent().parent().attr('data-id'));
+		showEditModal($(this).attr('id'), $(this).parent().parent().parent().parent().attr('data-id'));
 	});
 
 	// Removes an item from an order when the "remove item" button is clicked
 	$('.order-overview').on("click", ".remove-item-from-order", function() {
 		//Pass in the unique ID for the item to remove.
-		removeFromOrder($(this).parent().parent().parent().attr('data-id'));
+		removeFromOrder($(this).parent().parent().parent().parent().attr('data-id'));
 	});
 
 	// ---------------------------------
@@ -485,7 +484,9 @@ $(document).ready(function() {
 					//Remove the item from the overview screen
 					if(wasModalEdited){
 						//Remove the item from the arrays if the modal was edited and the "submit" button was clicked
-						$('.order-overview .overview .item[data-id="' + uniqueID + '"]').remove();
+						$('.order-overview .overview .item[data-id="' + uniqueID + '"]').hide(function() {
+							$(this).remove()
+						});
 						orderTotal -= itemToRemove['price'];
 						$('.order-overview .total h2').html('$' + Math.floor(orderTotal * 100) / 100);
 						currOrder.splice(itemIndex, 1);
