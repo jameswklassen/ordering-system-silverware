@@ -95,6 +95,22 @@ body {
     background: rgb(70, 124, 19)
 }
 
+.search-container {
+    position: relative;
+    width: 100%;
+}
+.search-container .btn#search {
+    position: absolute;
+    right: 0;
+    top: -90px;
+    border-radius: 100%;
+    background: #aaa;
+    color: #222;
+}
+.search-container .btn#search:hover {
+    background: #888;
+}
+
 
 /* -------------------------------
 
