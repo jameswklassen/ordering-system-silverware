@@ -24,7 +24,7 @@ $(document).ready(function() {
 	});
 
 	init(); // initialize 
-	drawMenu('starter'); // set the initial category to "starters"
+	drawMenu('popular'); // set the initial category to "starters"
 	$('.btn#submit-order-btn').hide(); //hide the submit button to start
 	$(".submit-confirm-message").hide();
 
