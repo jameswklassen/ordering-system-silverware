@@ -173,21 +173,23 @@ const menuItems = [{
     'photoName': 'tea',
     'price': 3.99,
     'category': 'drink',
-    'description': 'Description',
+    'description': 'Papa Roller\'s is bringing fresh and wild new menu items like this hot take. Enjoy Papa\'s in house brew of Tulsi green tea. This is an enjoyable drink for tea lovers everywhere, it puts a new twist on the classic green tea. This isn\'t your everyday green tea, this tea will leave you wishing everyone the best.',
     'calories': 5,
     'popularity': 2,
     'customizations': {}
 },
 {
     'id': 14,
-    'title': 'Avocado Bread',
+    'title': 'Avocado Toast',
     'photoName': 'avocado-bread',
     'price': 8.99,
     'category': 'starter',
-    'description': 'Description',
+    'description': 'Avocado Toast is a brilliant example of how Papa Roller is changing the game. Where have you seen this menu item at a restaurant before? That\'s what I\'m saying! Even if you\'ve tried Avocado Toast at your local diner before, you haven\'t tried the magic that is Papa Roller\'s Avocado Toast, so go ahead, live a little, and try this fresh new starter item. Available for a limited time!',
     'calories': 380,
     'popularity': 6,
-    'customizations': {}  
+    'customizations': {
+        'spinach': false
+    }  
 },
 {
     'id': 15,
@@ -195,7 +197,7 @@ const menuItems = [{
     'photoName': 'canapes-cheese',
     'price': 9.99,
     'category': 'starter',
-    'description': 'Description',
+    'description': 'A simple treat, that is a must try in the Roller house. What else could be better than a cracker, cheese and a fresh, thin cut of smoked Salmon. Smoked by Papa Roller himself, this starter item will transport you and all of your guests straight to the paradise that is heaven and back. You won\'t regret ordering this treat!',
     'calories': 80,
     'popularity': 4,
     'customizations': {}    

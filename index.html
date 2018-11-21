@@ -3,12 +3,16 @@
 <head>
 <title>Welcome to Papa Roller's</title>
 <meta content="width=device-width,minimum-scale=1,maximum-scale=1" name="viewport"/>
+
+<!-- CSS Styles -->
 <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
 <link rel="stylesheet" type="text/css" href="vendor/featherlight/featherlight.min.css">
+
+<!-- Font -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet">
 
+<!-- Custom CSS Styles -->
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/order.css">
 
@@ -16,6 +20,7 @@
 
 <body>
 
+<!-- Start screen -->
 <div class= "start-background">
 	<div class="start-screen">
 		<div class=start-logo>
@@ -25,6 +30,7 @@
 		<div class="start-message">Tap anywhere to start</div>
 	</div>
 
+	<!-- Order complete message -->
 	<div class="submit-confirm-message">
 		<div class=start-logo>
 			<div class="start-name">Your Order was sent</div>
@@ -32,13 +38,14 @@
 	</div>
 </div>
 
+<!-- Buttons for the interface -->
 <div class="container btn-container">
 	<div class="btn" id="help">?</div>
 	<div class="btn disabled" id="order">Your order <span class="qty"></span></div>
 	<div class="btn" id="submit-order-btn">Submit</div>
 </div>
 
-
+<!-- Order overview screen -->
 <div class="order-overview">
 	<div class="container">
 		<div class="header">
@@ -59,12 +66,14 @@
 			<!-- List of orders placed -->
 		</div>
 		
+		<!-- Total cost for an order -->
 		<div class="total">
 			<h2></h2>
 		</div>
 	</div>
 </div>
-	
+
+<!-- Header -->
 <header>
 
 	<div class="container">
@@ -74,6 +83,7 @@
 
 </header>
 
+<!-- Tabbed interface buttons -->
 <section class="menu">
 	<div class="container">
 		<div class="search-container">
@@ -96,7 +106,7 @@
 <footer>
 </footer>
 
-<!-- modal that will be filled by clicked menu item -->
+<!-- Modal that will be filled by clicked menu item -->
 <div class="popup-modal">
 	<div id="item">
 		<div class="image"></div>
@@ -145,6 +155,7 @@
 		
 </body>
 
+<!-- Javascript -->
 <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="vendor/featherlight/featherlight.min.js"></script>
