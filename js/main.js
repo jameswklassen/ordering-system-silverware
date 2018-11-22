@@ -61,14 +61,16 @@ $(document).ready(function() {
 			$('.btn#order').show();
 			$('.btn#submit-order-btn').hide();
 		} else {
-			$(".order-overview").fadeIn();
-			$('.btn#order').hide();
-			if(currOrder.length == 0) {
-				$('.btn#submit-order-btn').addClass('disabled');
-			} else {
-				$('.btn#submit-order-btn').removeClass('disabled');
+			if(currOrder.length > 0) {
+				$(".order-overview").fadeIn();
+				$('.btn#order').hide();
+				if(currOrder.length == 0) {
+					$('.btn#submit-order-btn').addClass('disabled');
+				} else {
+					$('.btn#submit-order-btn').removeClass('disabled');
+				}
+				$('.btn#submit-order-btn').show();
 			}
-			$('.btn#submit-order-btn').show();
 		}
 	});
 

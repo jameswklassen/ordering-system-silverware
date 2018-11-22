@@ -82,6 +82,7 @@ body {
 .btn.disabled {
     background: #ddd !important;
     color: #aaa !important;
+    cursor: not-allowed;
 }
 
 .btn#order, .btn#submit-order-btn {
