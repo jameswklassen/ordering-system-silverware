@@ -99,12 +99,16 @@ $(document).ready(function() {
 			$('.order-overview').fadeOut(800); //hide the order overview
 			$('.btn#submit-order-btn').fadeOut(800); //hide the submit button to start
 			$('.btn#order').fadeIn(800); //show the your order button
+			drawMenu('popular');
+			$('.menu .tabs .item').removeClass('active');
+			$('.menu #default').addClass('active');
 
 			//Clear the order
 			currOrder = new Array();
 			uniqueItemIDs = new Array();
 			orderCustomizations = new Array();
 			orderTotal = 0;
+			updateTotals();
 			$('.order-overview .overview').empty();
 			$('#order').addClass('disabled');
 			$('.btn#order .qty').html('');
