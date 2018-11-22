@@ -106,6 +106,9 @@ body {
     border-radius: 100%;
     background: #aaa;
     color: #222;
+    width: 60px;
+    line-height: 60px;
+    padding: 0;
 }
 .search-container .btn#search:hover {
     background: #888;
