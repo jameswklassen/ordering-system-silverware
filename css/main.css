@@ -327,6 +327,10 @@ section.menu .tabs .item:hover::after {
     display: none;
 }
 
+.nutrition {
+    font-family: 'Varela Round', sans-serif;
+}
+
 #submit-order {
     position: absolute;
     bottom: 0; right: 30px;
