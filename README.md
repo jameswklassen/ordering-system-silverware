@@ -1,7 +1,7 @@
 # ordering-system-silverware
 Human Computer Interaction Fall 2018 Group 1 Project
 
-The high fidelity prototype for the Silverware resturaunt ordering system. Created for the COMP 3020: HCI 1 class.
+The high fidelity prototype for the Silverware restaurant ordering system. Created for the COMP 3020: HCI 1 class.
 
 This prototype is built using:
 * [Bootstrap v4.1.3](https://getbootstrap.com/)
