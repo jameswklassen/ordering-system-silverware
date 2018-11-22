@@ -510,6 +510,7 @@ section.menu .tabs .item:hover::after {
     position: absolute;
     bottom: 327px;
     left: 100px;
+    width: 305px;
 }
 
 #help-screen #content a {
