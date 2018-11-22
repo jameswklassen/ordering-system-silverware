@@ -24,7 +24,6 @@
     Body styles
 
 ------------------------------- */
-
 body {
     background-color: #000;
     color: #fff;
@@ -117,7 +116,6 @@ body {
     Header styles
 
 ------------------------------- */
-
 header .container {
     position: fixed;
     top: 15px;
@@ -146,7 +144,6 @@ header h2 {
     Start Screen styles
 
 ------------------------------- */
-
 .start-background {
     z-index: 16;
     position: fixed;
@@ -193,7 +190,6 @@ header h2 {
     Menu styles
 
 ------------------------------- */
-
 section.menu {
     position: fixed;
     top: 150px;
@@ -327,7 +323,6 @@ section.menu .tabs .item:hover::after {
     Menu item popup styles
 
 ------------------------------- */
-
 .popup-modal {
     display: none;
 }
@@ -487,7 +482,6 @@ section.menu .tabs .item:hover::after {
     Help screen popup
 
 ------------------------------- */
-
 #help-screen {
     z-index: 14;
     position: fixed;

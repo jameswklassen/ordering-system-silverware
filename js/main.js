@@ -301,18 +301,7 @@ $(document).ready(function() {
 		$('.order-overview .total h2').html('$' + Math.floor(orderTotal * 100) / 100); // output the new total at the bottom of the order page (truncated to 2 decimals)
 
 		//Update the order button based on the order length
-		if(currOrder.length > 0) {
-			$('#order').removeClass('disabled'); // make the order button green when an order has items in it
-			$('.btn#order .qty').html(' (' + currOrder.length + ')');
-			$('.btn#order').css('transform', 'scale(1.3)')
-			setTimeout(function() {
-				$('.btn#order').css('transform', 'scale(1.0)');
-			}, 150);
-		} else {
-			$('#order').addClass('disabled');
-			$('.btn#order .qty').html('');
-			$(".order-overview").fadeOut();
-		}
+		updateTotals();
 	}
 
 	//Remove an item from an order given that item's unique ID.
@@ -346,22 +335,7 @@ $(document).ready(function() {
 		});
 
 		//Update the totals and other information
-		//Update the order button based on the order length
-		if(currOrder.length > 0) {
-			$('#order').removeClass('disabled'); // make the order button green when an order has items in it
-			$('.btn#order .qty').html(' (' + currOrder.length + ')');
-			$('.btn#order').css('transform', 'scale(1.3)')
-			setTimeout(function() {
-				$('.btn#order').css('transform', 'scale(1.0)');
-			}, 150);
-		} else {
-			$('#order').addClass('disabled');
-			$('.btn#order .qty').html('');
-			$(".order-overview").fadeOut();
-			$(".btn#submit-order-btn").hide();
-			$('#order').show();
-
-		}
+		updateTotals();
 
 		//Show the edit buttons now
 		$('.order-overview .overview .edit-item-in-order').show();
@@ -380,6 +354,22 @@ $(document).ready(function() {
 			$('.order-overview .overview .remove-item-from-order').fadeOut();
 			$('.order-overview .overview .edit-item-in-order').fadeOut();
 			editMode = false;
+		}
+	}
+
+	function updateTotals() {
+		//Update the order button based on the order length
+		if(currOrder.length > 0) {
+			$('#order').removeClass('disabled'); // make the order button green when an order has items in it
+			$('.btn#order .qty').html(' (' + currOrder.length + ')');
+			$('.btn#order').css('transform', 'scale(1.3)')
+			setTimeout(function() {
+				$('.btn#order').css('transform', 'scale(1.0)');
+			}, 150);
+		} else {
+			$('#order').addClass('disabled');
+			$('.btn#order .qty').html('');
+			$(".order-overview").fadeOut();
 		}
 	}
 
@@ -494,6 +484,9 @@ $(document).ready(function() {
 						orderCustomizations.splice(itemIndex, 1);
 						specialRequirements.splice(itemIndex, 1);
 					}
+					
+					//Update the totals and other information
+					updateTotals();
 
 					//Show the edit buttons now
 					$('.order-overview .overview .edit-item-in-order').show();
