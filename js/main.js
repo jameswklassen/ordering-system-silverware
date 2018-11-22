@@ -452,7 +452,7 @@ $(document).ready(function() {
 			// Hide the submit button
 			$(modal + ' #submit-order').attr('data-id', id);
 			$(modal + ' #submit-order').hide();
-			$('.featherlight-content #item').parent().parent().fadeIn(800);
+			$('.featherlight-content #item').parent().parent().fadeIn(300);
 		}
 	}
 
