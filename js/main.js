@@ -121,7 +121,8 @@ $(document).ready(function() {
 
 	//if one of the call server buttons is clicked, confirm they want to call
 	$("#content").click(function() {
-		if(confirm("Are you sure you want to call the server?")) {
+		console.log($(this).children().attr('data-id'));
+		if($(this).children().attr('data-id') !== "system-font-settings" && confirm("Are you sure you want to call the server?")) {
 			$("#help-screen").fadeOut();
 			$('#help').html('<i class="fas fa-check"></i> server on the way');
 			$('#help').addClass('active');
@@ -327,6 +328,8 @@ $(document).ready(function() {
 		if(currOrder.length == 0) {
 			toggleEditMode();
 			$('.order-overview .overview').empty();
+			$('.btn#order').show();
+			$('.btn#submit-order-btn').hide();
 		}
 
 		//Remove the item from the overview screen
