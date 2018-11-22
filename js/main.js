@@ -421,7 +421,7 @@ $(document).ready(function() {
 			$(modal + ' h1').html(item['title']);
 			$(modal + ' h2.cost').html('$' + item['price']);
 			$(modal + ' .row .description').html(item['description']);
-			$(modal + ' .row .nutrition').html('<i class="fas fa-utensils"></i> Calories: ' + item['calories']);
+			$(modal + ' .row .nutrition').html('<i class="fas fa-fire"></i> Calories: ' + item['calories']);
 			$(modal + ' .image').css('background-image', 'url("img/' + item['photoName'] + '.jpg")');
 			// $(modal + ' #add-item-to-order').attr('data-id', item['id']);
 
