@@ -107,7 +107,9 @@ $(document).ready(function()
 		}
 		else
 		{
-			$(".order-overview").fadeIn();
+			if(currOrder.length > 0) {
+				$(".order-overview").fadeIn();
+			}
 		}
 	});
 
