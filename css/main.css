@@ -347,6 +347,15 @@ section.menu .tabs .item:hover::after {
     right: 15px !important;
 }
 
+
+.featherlight .featherlight-close-icon {
+    font-size: 20px;
+    background: rgba(255,255,255, 0.6);
+    width: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+}
+
 .featherlight-content {
     width: 90vw;
     max-width: 700px;
