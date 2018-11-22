@@ -135,7 +135,7 @@ const menuItems = [{
     'photoName': 'close-up-cooking-dinner',
     'price': 20.99,
     'category': 'entree',
-    'description': 'Like Steak? Like Fish? Like Salmon? You won\'t be dissapointed at the latest addition to the Papa Roller name. This flaky, tender and delicious menu offering will leave your mouth water for more. This Salmon is caught from the river by the Papa himself, yes, he goes fishing every Saturday.',
+    'description': 'Like Steak? Like Fish? Like Salmon? You won\'t be dissapointed at the latest addition to the Papa Roller name. This flaky, tender and delicious menu offering will leave your mouth watering for more. This Salmon is caught from the river by the Papa himself, yes, he goes fishing every Saturday.',
     'calories': 430,
     'popularity': 4,
     'customizations': {
@@ -162,7 +162,7 @@ const menuItems = [{
     'photoName': 'alcohol-beer-beverage',
     'price': 8.99,
     'category': 'drink',
-    'description': 'What else would one need after a long hard day at the office? A cold beer to crack with the boy\'s. In Papa\'s home, we always have plenty of beer. Brewed right here, by Papa Roller himself. Our Cold Beer is one of our most popular and refreshing beverages.',
+    'description': 'What else would one need after a long hard day at the office? A cold beer to crack with the boys. In Papa\'s home, we always have plenty of beer. Brewed right here, by Papa Roller himself. Our Cold Beer is one of our most popular and refreshing beverages.',
     'calories': 90,
     'popularity': 10,
     'customizations': {}
