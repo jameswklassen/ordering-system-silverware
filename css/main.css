@@ -505,6 +505,13 @@ section.menu .tabs .item:hover::after {
     left: 100px;
 }
 
+#help-screen #todo {
+    z-index: 1;
+    position: absolute;
+    bottom: 327px;
+    left: 100px;
+}
+
 #help-screen #content a {
     color: rgb(199, 199, 199);
     display: block;
@@ -515,7 +522,22 @@ section.menu .tabs .item:hover::after {
     border-radius: 21px;
 }
 
+#help-screen #todo a {
+    color: rgb(199, 199, 199);
+    display: block;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 21px;
+}
+
 #help-screen #content a:hover {
+    background: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+}
+
+#help-screen #todo a:hover {
     background: rgba(255, 255, 255, 0.4);
     text-decoration: none;
 }
