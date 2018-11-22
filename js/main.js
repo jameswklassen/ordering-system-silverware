@@ -327,6 +327,8 @@ $(document).ready(function() {
 		if(currOrder.length == 0) {
 			toggleEditMode();
 			$('.order-overview .overview').empty();
+			$('.btn#order').show();
+			$('.btn#submit-order-btn').hide();
 		}
 
 		//Remove the item from the overview screen
